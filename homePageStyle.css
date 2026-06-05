@@ -1,13 +1,6 @@
-/* bading */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
+  :root {
     --sky: #29B6F6;
     --sky-dark: #0288D1;
     --sky-light: #E1F5FE;
@@ -20,28 +13,22 @@
     --muted: #546E7A;
     --radius: 18px;
     --radius-sm: 10px;
-}
+  }
 
-body {
+  body {
     font-family: 'DM Sans', sans-serif;
     color: var(--text);
     background: var(--white);
     overflow-x: hidden;
-}
+  }
 
-/* NAV */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: var(--sky-dark);
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(41, 182, 246, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    border-bottom: 1px solid rgba(41,182,246,0.15);
+    display: flex; align-items: center; justify-content: space-between;
     padding: 0 5%;
     height: 64px;
   }
@@ -68,12 +55,12 @@ nav {
   .logo span { font-size: 1.2rem; font-weight: 700; color: var(--sky-dark); }
 
   .logo-img {
-  transform: scale(0.8);  /* 80% of original size */
+  transform: scale(0.8); 
 }
 
 
     /* HERO */
- .hero-image {
+  .hero-image {
   max-width: 110%;
   height: auto;
   object-fit: cover;
