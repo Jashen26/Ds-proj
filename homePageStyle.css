@@ -169,15 +169,10 @@ nav {
     flex-direction: column;
     max-width: 1200px;
     height: 600px;
-    clip-path:shape(
-    from 0% 0%, 
-    line to 100% 0%, 
-    line to 100% 80%, 
-    curve to 50% 100% using 75% 80%, 
-    line to 0% 80%
+      clip-path: shape(from 0 6px,curve to 7.14% 1px with 4.76% 2px,curve to 11.9% 0px with 9.52% 0px,curve to 16.67% 5.5px with 14.29% 0px,curve to 21.43% 9px with 19.05% 11px,curve to 26.19% 6.5px with 23.81% 7px,curve to 30.95% 5.5px with 28.57% 6px,curve to 35.71% 5.5px with 33.33% 5px,curve to 40.48% 7.5px with 38.1% 6px,curve to 45.24% 7px with 42.86% 9px,curve to 50% 5px with 47.62% 5px,curve to 54.76% 2.5px with 52.38% 5px,curve to 59.52% 2px with 57.14% 0px,curve to 64.29% 7px with 61.9% 4px,curve to 69.05% 6.5px with 66.67% 10px,curve to 73.81% 1.5px with 71.43% 3px,curve to 78.57% 4px with 76.19% 0px,curve to 83.33% 9.5px with 80.95% 8px,curve to 88.1% 10.5px with 85.71% 11px,curve to 92.86% 11px with 90.48% 10px,curve to 100% 6px with 95.24% 12px,vline to calc(100% - 6px),curve to 92.86% calc(100% - 9.5px) with 95.24% calc(100% - 11px),curve to 88.1% calc(100% - 6px) with 90.48% calc(100% - 8px),curve to 83.33% calc(100% - 7px) with 85.71% calc(100% - 4px),curve to 78.57% calc(100% - 6.5px) with 80.95% calc(100% - 10px),curve to 73.81% calc(100% - 2.5px) with 76.19% calc(100% - 3px),curve to 69.05% calc(100% - 1px) with 71.43% calc(100% - 2px),curve to 64.29% calc(100% - 2.5px) with 66.67% calc(100% - 0px),curve to 59.52% calc(100% - 8px) with 61.9% calc(100% - 5px),curve to 54.76% calc(100% - 7.5px) with 57.14% calc(100% - 11px),curve to 50% calc(100% - 2.5px) with 52.38% calc(100% - 4px),curve to 45.24% calc(100% - 2.5px) with 47.62% calc(100% - 1px),curve to 40.48% calc(100% - 7.5px) with 42.86% calc(100% - 4px),curve to 35.71% calc(100% - 6.5px) with 38.1% calc(100% - 11px),curve to 30.95% calc(100% - 7px) with 33.33% calc(100% - 2px),curve to 26.19% calc(100% - 7.5px) with 28.57% calc(100% - 12px),curve to 21.43% calc(100% - 3.5px) with 23.81% calc(100% - 3px),curve to 16.67% calc(100% - 3px) with 19.05% calc(100% - 4px),curve to 11.9% calc(100% - 5.5px) with 14.29% calc(100% - 2px),curve to 7.14% calc(100% - 7px) with 9.52% calc(100% - 9px),curve to 0 calc(100% - 6px) with 4.76% calc(100% - 5px),vline to 0);
 
-    );
 }
+
 
 .about h6 {
     margin:120px auto 0 auto;
