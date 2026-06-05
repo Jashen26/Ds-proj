@@ -43,7 +43,6 @@ nav {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(41,182,246,0.15);
     display: flex; align-items: center; justify-content: space-between;
-
     padding: 0 5%;
     height: 100px;
 
