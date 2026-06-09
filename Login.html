@@ -4,29 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KWARTA LOGIN</title>
-    <link rel="stylesheet" href="Login.CSS">
+    <link rel="stylesheet" href="Login.css">
 </head>
 <body>
-    <background img="images/background.jpg"></background>
-    <div class="design1"></div>
-    <div class="Container">
-    <h1>WELCOME!</h1>
-    <h6>log in to continue your journey</h6>
-    <br>
-    <div class="texts">
-    <input type="text" placeholder="Username" class="login-field">
-    <input type="password" placeholder="Password" class="login-field">
-    </div>
-    <br>
-    <div class="options">
-        <div class="remember">
-    <input type="checkbox" id="remember" name="remember">
-    <label for="remember">Remember me</label>
+
+    <div class="login-split-container">
+        
+        <div class="login-left-graphic">
+            <img src="images/Login.png" alt="" class="login-image">
         </div>
-    <button class="btn-ghost">Forgot password</button></div>
-    <div> <button class="btn-solid">Log in</button></div>
-    <hr>
-    <div>Sign up for an account? <button class="btn-ghost">Sign up</button></div>
+
+        <div class="login-right-form-side">
+            
+            <div class="Container">
+                <h1>WELCOME!</h1>
+                <h6>Welcome to K.W.A.R.T.A.!</h6>
+                <br>
+                <div class="texts">
+                    <input type="text" placeholder="Username" class="login-field">
+                    <input type="password" placeholder="Password" class="login-field">
+                </div>
+                <br>
+                <div class="options">
+                    <div class="remember">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <button type="button" class="btn-ghost">Forgot password</button>
+                </div>
+                <div> <button type="button" class="btn-solid">Log in</button></div>
+                <hr>
+                <div>Sign up for an account? <button type="button" class="btn-ghost">Sign up</button></div>
+            </div>
+
+        </div>
     </div>
+
 </body>
 </html>
