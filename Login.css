@@ -1,78 +1,110 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
 
- :root {
-    --sky: #29B6F6;
-    --sky-dark: #0288D1;
-    --sky-light: #E1F5FE;
-    --sky-mid: #81D4FA;
-    --navy: #0D2B5E;
-    --gold: #FFB300;
-    --gold-light: #FFF8E1;
-    --white: #ffffff;
-    --text: #1A1A2E;
-    --muted: #546E7A;
-    --radius: 18px;
-    --radius-sm: 10px;
-  }
+:root {
+  --sky: #29B6F6;
+  --sky-dark: #0288D1;
+  --sky-light: #E1F5FE;
+  --sky-mid: #81D4FA;
+  --navy: #0D2B5E;
+  --gold: #FFB300;
+  --gold-light: #FFF8E1;
+  --white: #ffffff;
+  --text: #1A1A2E;
+  --muted: #546E7A;
+  --radius: 18px;
+  --radius-sm: 10px;
+  --primaryColor: #3794fc;
+  --secondaryColor: #182E6F;
+  --accentColor: #ecc889;
+  --lightNeutral: #e8f4fc;
+  --darkNeutral: #001F3F;
+}
 
-  .design1 {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url('images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    opacity: 0.; 
-    z-index: -1; 
-  }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text);
-    background: var(--white);
-    overflow-x: hidden;
-    background: linear-gradient(skyblue, blue);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-    min-height: 100vh;     
-    margin: 0;
-  }
-
-  h1 {
-    text-align: center; margin-top: 80px;
-    color: var(--sky-dark); font-size: 2.5rem;
-  }
-
-   .logo {
-    display: flex; align-items: center; gap: 8px;
-  }
-
-  h6{
-    text-align: center; color: var(--muted); font-size: 0.9rem;
-  }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden; 
+}
 
 
-  .btn-ghost {
-    border: 1.5px solid var(--sky-dark); color: var(--sky-dark); background: transparent;
-    padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-    cursor: pointer; font-family: inherit; transition: all 0.2s;
-  }
-  .btn-ghost:hover { background: var(--sky-dark); color: white; }
-  .btn-solid {
-    background: var(--sky-dark); color: white;
-    padding: 9px 150px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-    border: none; cursor: pointer; font-family: inherit; transition: all 0.2s;
-  }
-  .btn-solid:hover { background: var(--navy); }
+.login-split-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
 
-  .texts {
+
+.login-left-graphic {
+  flex: 1;
+  background-color: var(--white); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.login-left-graphic .login-image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 20% top;
+}
+
+
+
+
+.login-right-form-side {
+  flex: 1;
+  background-color: var(--white); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+
+.Container {
+  display: flex; 
+  flex-direction: column; 
+  gap: 15px;              
+  width: 100%;
+  max-width: 400px; 
+  padding: 30px 20px;     
+}
+
+h1 {
+  text-align: center; 
+  margin-top: 0;
+  color: var(--sky-dark); 
+  font-size: 2.5rem;
+}
+
+h6 {
+  text-align: center; 
+  color: var(--muted); 
+  font-size: 1.5rem;
+}
+
+
+.texts {
   display: flex; 
   flex-direction: column; 
   gap: 12px;
-  width: 100%;            
+  width: 100%;        
 }
   
- .login-field {
+.login-field {
   width: 100%;            
   padding: 14px; 
   background: var(--white); 
@@ -80,39 +112,67 @@
   border-radius: 50px;    
   font-family: inherit;
   font-size: 0.95rem;
+  outline: none;
 }
-   .logo span { font-size: 1.2rem; font-weight: 700; color: var(--sky-dark); }
 
-   .logo-img {
-    transform: scale(0.8);  
-  }
-
- .options {
+.options {
   display: flex; 
   flex-direction: row; 
   justify-content: space-between; 
   align-items: center; 
   width: 100%;           
-  margin: -40px 0 15px 0;   
+  margin: 0 0 15px 0; 
 }
 
-  .remember {
-    display: flex; flex-direction: row; align-items: center; gap: 8px; background: none;
-    margin: 0;
-  }
-
-  
- .Container {
+.remember {
   display: flex; 
-  flex-direction: column; 
-  gap: 15px;              
-  width: 90%;
-  max-width: 400px; 
-  margin: 40px auto;      
-  padding: 30px 20px;     
-  background: var(--sky-light);
-  border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1); 
+  flex-direction: row; 
+  align-items: center; 
+  gap: 8px; 
+  background: none;
+  margin: 0;
+}
+
+
+.btn-ghost {
+  border: 1.5px solid var(--sky-dark); 
+  color: var(--sky-dark); 
+  background: transparent;
+  padding: 8px 20px; 
+  border-radius: 50px; 
+  font-size: 0.85rem; 
+  font-weight: 600;
+  cursor: pointer; 
+  font-family: inherit; 
+  transition: all 0.2s;
+}
+.btn-ghost:hover { 
+  background: var(--sky-dark); 
+  color: white; 
+}
+
+.btn-solid {
+  background: var(--sky-dark); 
+  color: white;
+  width: 100%; 
+  padding: 12px 0; 
+  border-radius: 50px; 
+  font-size: 0.85rem; 
+  font-weight: 600;
+  border: none; 
+  cursor: pointer; 
+  font-family: inherit; 
+  transition: all 0.2s;
+}
+.btn-solid:hover { 
+  background: var(--navy); 
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #000000;
+  margin: 10px 0;
 }
 
 .Container > div:not(.texts):not(.options) {
