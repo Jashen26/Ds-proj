@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply — KWARTA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="application.css">
+</head>
+<body>
+
+    <!-- ===================== NAV ===================== -->
+    <header class="site-header">
+        <nav class="site-nav">
+            <div class="nav-brand">
+                <!-- <img src="images/logo.png" alt=""> -->
+                <span>kwarta</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Apply</a></li>
+                <li class="has-dropdown">
+                    <a href="#">Services <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <div class="dropdown">
+                        <a href="#">Requirements</a>
+                        <a href="#">FAQs</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </li>
+                <li class="has-dropdown">
+                    <a href="#">Account <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <div class="dropdown">
+                        <a href="#">Profile</a>
+                        <hr>
+                        <a href="#">Sign out</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===================== STATE RADIOS ===================== -->
+    <input type="radio" name="slider" id="card1" checked class="state-radio">
+    <input type="radio" name="slider" id="card2" class="state-radio">
+    <input type="radio" name="slider" id="card3" class="state-radio">
+    <input type="radio" name="slider" id="card4" class="state-radio">
+    <input type="radio" name="slider" id="card5" class="state-radio">
+
+    <!-- ===================== PROGRESS TRACK BAR ===================== -->
+    <div class="progress-wrapper">
+        <div class="progress-inner">
+            <div class="track-bar">
+                <div class="track-step step-1">
+                    <div class="track-dot">I</div>
+                    <span class="track-label">Applicant Info</span>
+                </div>
+                <div class="track-line line-1"></div>
+                <div class="track-step step-2">
+                    <div class="track-dot">II</div>
+                    <span class="track-label">Household</span>
+                </div>
+                <div class="track-line line-2"></div>
+                <div class="track-step step-3">
+                    <div class="track-dot">III</div>
+                    <span class="track-label">Economic Status</span>
+                </div>
+                <div class="track-line line-3"></div>
+                <div class="track-step step-4">
+                    <div class="track-dot">IV</div>
+                    <span class="track-label">Documents</span>
+                </div>
+                <div class="track-line line-4"></div>
+                <div class="track-step step-5">
+                    <div class="track-dot">V</div>
+                    <span class="track-label">Review & Submit</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="page-main">
+
+        <!-- ===================== FORM CARDS ===================== -->
+        <div class="form-wrapper">
+
+            <!-- CARD 1: Applicant Information -->
+            <div class="card item-1">
+                <h2 class="card-title">I. Applicant Information</h2>
+
+                <div class="form-section-label">Full Name</div>
+                <div class="form-grid row-name">
+                    <div class="form-group">
+                        <label>First name <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. Juan">
+                    </div>
+                    <div class="form-group">
+                        <label>Middle name</label>
+                        <input type="text" placeholder="e.g. Santos">
+                    </div>
+                    <div class="form-group">
+                        <label>Surname <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. Dela Cruz">
+                    </div>
+                    <div class="form-group">
+                        <label>Suffix</label>
+                        <input type="text" placeholder="e.g. Jr.">
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <div class="form-section-label">Demographics</div>
+                <div class="form-grid row-demographics">
+                    <div class="form-group">
+                        <label>Date of Birth <span class="req">*</span></label>
+                        <input type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Place of Birth <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. Manila City">
+                    </div>
+                    <div class="form-group">
+                        <label>Sex <span class="req">*</span></label>
+                        <select>
+                            <option value="" disabled selected>Select</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Civil Status <span class="req">*</span></label>
+                        <select>
+                            <option value="" disabled selected>Select Status</option>
+                            <option>Single</option>
+                            <option>Married</option>
+                            <option>Widowed</option>
+                            <option>Separated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-grid row-halves">
+                    <div class="form-group">
+                        <label>Solo Parent? <span class="req">*</span></label>
+                        <div class="radio-group-inline">
+                            <div class="radio-wrapper"><input type="radio" name="soloParent" id="solo-yes" value="Yes"><label for="solo-yes">Yes</label></div>
+                            <div class="radio-wrapper"><input type="radio" name="soloParent" id="solo-no" value="No" checked><label for="solo-no">No</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <div class="form-section-label">Contact Information</div>
+                <div class="form-grid row-contact">
+                    <div class="form-group form-group--wide">
+                        <label>Email <span class="req">*</span></label>
+                        <input type="email" placeholder="e.g. juansantosdelacruz@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. 09123456789">
+                    </div>
+                    <div class="form-group">
+                        <label>Landline <span class="optional">(optional)</span></label>
+                        <input type="text" placeholder="e.g. 0281234567">
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <div class="form-section-label">Current Address</div>
+                <div class="form-grid row-address">
+                    <div class="form-group form-group--sm">
+                        <label>House no. <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. 123">
+                    </div>
+                    <div class="form-group">
+                        <label>Street / Purok / Sitio <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. Banana Rd.">
+                    </div>
+                    <div class="form-group">
+                        <label>Barangay <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. Singkamas">
+                    </div>
+                </div>
+                <div class="form-grid row-thirds">
+                    <div class="form-group">
+                        <label>City / Municipality <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. San Mateo">
+                    </div>
+                    <div class="form-group">
+                        <label>Province <span class="req">*</span></label>
+                        <select>
+                            <option value="" disabled selected>Select Province</option>
+                            <option>Metro Manila</option>
+                            <option>Rizal</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Region <span class="req">*</span></label>
+                        <select>
+                            <option value="" disabled selected>Select Region</option>
+                            <option>NCR</option>
+                            <option>CALABARZON</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section-label" style="margin-top: 1.5rem;">Permanent Address</div>
+                <div class="checkbox-wrapper" style="margin-top: -0.25rem; margin-bottom: 1.25rem;">
+                    <input type="checkbox" id="same-address">
+                    <label for="same-address">Same as current address</label>
+                </div>
+                <div id="permanent-address-section">
+                    <div class="form-grid row-address">
+                        <div class="form-group form-group--sm">
+                            <label>House no. <span class="req">*</span></label>
+                            <input type="text" placeholder="e.g. 123">
+                        </div>
+                        <div class="form-group">
+                            <label>Street / Purok / Sitio <span class="req">*</span></label>
+                            <input type="text" placeholder="e.g. Banana Rd.">
+                        </div>
+                        <div class="form-group">
+                            <label>Barangay <span class="req">*</span></label>
+                            <input type="text" placeholder="e.g. Singkamas">
+                        </div>
+                    </div>
+                    <div class="form-grid row-thirds">
+                        <div class="form-group">
+                            <label>City / Municipality <span class="req">*</span></label>
+                            <input type="text" placeholder="e.g. San Mateo">
+                        </div>
+                        <div class="form-group">
+                            <label>Province <span class="req">*</span></label>
+                            <select>
+                                <option value="" disabled selected>Select Province</option>
+                                <option>Metro Manila</option>
+                                <option>Rizal</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Region <span class="req">*</span></label>
+                            <select>
+                                <option value="" disabled selected>Select Region</option>
+                                <option>NCR</option>
+                                <option>CALABARZON</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <span class="btn btn--disabled">← Previous</span>
+                    <label for="card2" class="btn btn--next">Next →</label>
+                </div>
+            </div>
+
+            <!-- CARD 2: Household Information -->
+            <div class="card item-2">
+                <h2 class="card-title">II. Household Information</h2>
+
+                <div class="household-total">
+                    <div class="household-total-label">Total Household Members <small>(Including Applicant)</small></div>
+                    <div class="household-total-count" id="count-total">1</div>
+                </div>
+                <div class="household-stat-grid">
+                    <div class="household-stat-card"><div class="household-stat-card-label">Adults</div><div class="household-stat-card-num" id="count-adult">0</div></div>
+                    <div class="household-stat-card"><div class="household-stat-card-label">Children</div><div class="household-stat-card-num" id="count-child">0</div></div>
+                    <div class="household-stat-card"><div class="household-stat-card-label">Senior Citizens</div><div class="household-stat-card-num" id="count-senior">0</div></div>
+                    <div class="household-stat-card"><div class="household-stat-card-label">PWD Members</div><div class="household-stat-card-num" id="count-pwd">0</div></div>
+                </div>
+
+                <hr class="form-divider">
+
+                <div class="repeater-section-header">
+                    <div class="form-section-label">Adult Members</div>
+                    <button type="button" class="btn-add-item" id="btn-add-adult">+ Add Adult</button>
+                </div>
+                <div id="container-adult"></div>
+
+                <hr class="form-divider">
+
+                <div class="repeater-section-header">
+                    <div class="form-section-label">Dependent Children</div>
+                    <button type="button" class="btn-add-item" id="btn-add-child">+ Add Child</button>
+                </div>
+                <div id="container-child"></div>
+
+                <hr class="form-divider">
+
+                <div class="repeater-section-header">
+                    <div class="form-section-label">Senior Citizens</div>
+                    <button type="button" class="btn-add-item" id="btn-add-senior">+ Add Senior Citizen</button>
+                </div>
+                <div id="container-senior"></div>
+
+                <hr class="form-divider">
+
+                <div class="repeater-section-header">
+                    <div class="form-section-label">PWD Members</div>
+                    <button type="button" class="btn-add-item" id="btn-add-pwd">+ Add PWD Member</button>
+                </div>
+                <div id="container-pwd"></div>
+
+                <div class="btn-group">
+                    <label for="card1" class="btn btn--prev">← Previous</label>
+                    <label for="card3" class="btn btn--next">Next →</label>
+                </div>
+            </div>
+
+            <!-- CARD 3: Economic Status -->
+            <div class="card item-3">
+                <h2 class="card-title">III. Economic Status</h2>
+
+                <div class="form-section-label">Household Source of Income <span class="req">*</span></div>
+                <div class="checkbox-grid">
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-1"><label for="inc-1">Employment (Private)</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-2"><label for="inc-2">Employment (Govt)</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-3"><label for="inc-3">Business / Self-employed</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-4"><label for="inc-4">Freelance work</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-5"><label for="inc-5">Remittances</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-6"><label for="inc-6">Pension</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-7"><label for="inc-7">Govt benefits</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-8"><label for="inc-8">Rental income</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-9"><label for="inc-9">Farming / Fishing</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-10"><label for="inc-10">Commissions</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-11"><label for="inc-11">Financial support</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-12"><label for="inc-12">Scholarships</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-13"><label for="inc-13">Part-time jobs</label></div>
+                    <div class="checkbox-wrapper"><input type="checkbox" id="inc-14"><label for="inc-14">Online Selling</label></div>
+                </div>
+
+                <hr class="form-divider">
+
+                <div class="form-grid row-halves">
+                    <div class="form-group">
+                        <label>Total Monthly Household Income <span class="req">*</span></label>
+                        <input type="number" placeholder="e.g. 25000">
+                    </div>
+                </div>
+
+                <div class="form-section-label">Proof of Income / Financial Documents <span class="req">*</span></div>
+                <div class="form-grid row-halves">
+                    <div class="form-group">
+                        <label>Document Type</label>
+                        <select>
+                            <option value="" disabled selected>Select Document Provided</option>
+                            <option>Affidavit of No Income</option>
+                            <option>Latest ITR</option>
+                            <option>Certificate of Employment (COE)</option>
+                            <option>Recent payslips (3–6 months)</option>
+                            <option>Bank statements</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <label for="card2" class="btn btn--prev">← Previous</label>
+                    <label for="card4" class="btn btn--next">Next →</label>
+                </div>
+            </div>
+
+            <!-- CARD 4: Document Submission -->
+            <div class="card item-4">
+                <h2 class="card-title">IV. Document Submission</h2>
+
+                <p class="card-intro">Since documents cannot be uploaded directly here, please submit all required files through our Google Forms link below. Include your name and ID number so we can match your documents to your application.</p>
+
+                <div class="doc-info-box">
+                    <div class="doc-info-box-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <div class="doc-info-box-body">
+                        <div class="doc-info-box-title">Your Application Reference</div>
+                        <div class="doc-info-box-text">In the Google Form, enter your <strong>Full Name</strong> and <strong>Valid ID Number</strong> (as provided in Step I) in the Application ID field.</div>
+                    </div>
+                </div>
+
+                <div class="form-section-label">Required Documents</div>
+                <div class="doc-list">
+                    <div class="doc-list-item">
+                        <div class="doc-list-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+                        <div class="doc-list-item-body">Picture of Valid ID<small>Front and back of your ID</small></div>
+                    </div>
+                    <div class="doc-list-item">
+                        <div class="doc-list-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                        <div class="doc-list-item-body">Recent 2×2 Photo / Selfie<small>Clear, recent photo of the applicant</small></div>
+                    </div>
+                    <div class="doc-list-item">
+                        <div class="doc-list-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                        <div class="doc-list-item-body">Barangay Certificate<small>Issued within the last 6 months</small></div>
+                    </div>
+                    <div class="doc-list-item">
+                        <div class="doc-list-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                        <div class="doc-list-item-body">Proof of Residency<small>Utility bill, lease contract, etc.</small></div>
+                    </div>
+                    <div class="doc-list-item">
+                        <div class="doc-list-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                        <div class="doc-list-item-body">Proof of Income<small>ITR, payslips, COE, or Affidavit of No Income</small></div>
+                    </div>
+                </div>
+
+                <div class="btn-container" style="justify-content: center; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 2rem;">
+                    <a href="https://forms.google.com" target="_blank" class="gforms-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Open Document Submission Form
+                    </a>
+                    <p style="font-size: 0.8125rem; color: var(--gray); text-align: center;">Opens in a new tab · Submit all documents before continuing</p>
+                </div>
+
+                <div class="nested-form-block" style="margin-top: 1.25rem;">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="doc-submitted">
+                        <label for="doc-submitted">I have submitted all required documents through the Google Form above.</label>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <label for="card3" class="btn btn--prev">← Previous</label>
+                    <label for="card5" class="btn btn--next">Next →</label>
+                </div>
+            </div>
+
+            <!-- CARD 5: Review & Submit -->
+            <div class="card item-5">
+                <h2 class="card-title">V. Review & Submit</h2>
+
+                <p class="card-intro">Please ensure all information provided in the previous sections is accurate and true. Falsifying documents or providing misleading information may result in automatic rejection of your application.</p>
+
+                <div class="form-section-label">Applicant Confirmation</div>
+                <div class="nested-form-block">
+                    <div class="checkbox-wrapper" style="margin-bottom: 1rem;">
+                        <input type="checkbox" id="terms-cond">
+                        <label for="terms-cond"><strong>Terms and Conditions:</strong> I have read and agree to the Terms and Conditions of the program.</label>
+                    </div>
+                    <div class="checkbox-wrapper" style="margin-bottom: 1rem;">
+                        <input type="checkbox" id="data-consent">
+                        <label for="data-consent"><strong>Consent to Data Processing:</strong> I consent to the collection, use, and processing of my personal data under the Data Privacy Act.</label>
+                    </div>
+
+                    <hr class="form-divider" style="margin: 1rem 0;">
+
+                    <p style="font-size: 0.875rem; color: var(--text); margin-bottom: 0.75rem;"><strong>Signature Declaration:</strong> I hereby declare that all information provided in this application is true, correct, and complete.</p>
+                    <div class="form-group">
+                        <label>Applicant's Printed Name <span class="req">*</span></label>
+                        <input type="text" id="sig-name" placeholder="Type your full name as signature" autocomplete="name">
+                    </div>
+                </div>
+
+                <div class="warning-box" style="margin-top: 1.5rem;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Once you submit your application, you can no longer change or edit the information provided.
+                </div>
+
+                <div class="btn-group">
+                    <label for="card4" class="btn btn--prev">← Previous</label>
+                    <button type="submit" class="btn btn--submit">Submit Application</button>
+                </div>
+            </div>
+
+        </div><!-- /form-wrapper -->
+    </main>
+    <script src="application.js"></script>
+
+</body>
+</html>
