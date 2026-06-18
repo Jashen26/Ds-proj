@@ -1,246 +1,198 @@
-// ====================== KWARTA Application Form JS ======================
+const activeUserSession = localStorage.getItem('currentUser');
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    // ====================== CORE ELEMENTS ======================
-    const stateRadios = document.querySelectorAll('input[name="slider"]');
-    const cards = document.querySelectorAll('.card');
-
-    // Address
-    const sameAddressCheck = document.getElementById('same-address');
-    const permanentSection = document.getElementById('permanent-address-section');
-
-    // Household
-    const totalCountEl = document.getElementById('count-total');
-    const adultCountEl = document.getElementById('count-adult');
-    const childCountEl = document.getElementById('count-child');
-    const seniorCountEl = document.getElementById('count-senior');
-    const pwdCountEl = document.getElementById('count-pwd');
-
-    const btnAddAdult = document.getElementById('btn-add-adult');
-    const btnAddChild = document.getElementById('btn-add-child');
-    const btnAddSenior = document.getElementById('btn-add-senior');
-    const btnAddPWD = document.getElementById('btn-add-pwd');
-
-    const containers = {
-        adult: document.getElementById('container-adult'),
-        child: document.getElementById('container-child'),
-        senior: document.getElementById('container-senior'),
-        pwd: document.getElementById('container-pwd')
-    };
-
-    // Solo Parent
-    const soloYes = document.getElementById('solo-yes');
-
-    // ====================== HELPER FUNCTIONS ======================
-    function getCurrentCardIndex() {
-        return Array.from(stateRadios).findIndex(radio => radio.checked);
+if (!activeUserSession) {
+    alert("Access Denied! Please log in first.");
+    window.location.href = "login.html";
+} else {
+    const userObj = JSON.parse(activeUserSession);
+    
+    const displayElem = document.getElementById('userDisplay');
+    if (displayElem) {
+        displayElem.textContent = userObj.email;
     }
+}
 
-    function goToCard(index) {
-        if (index < 0 || index > 4) return;
-        stateRadios[index].checked = true;
-        window.scrollTo({ top: 140, behavior: 'smooth' });
-    }
+document.getElementById('signOutBtn').addEventListener('click', function(e) {
+    e.preventDefault(); 
 
-    function validateCurrentCard() {
-        const currentIndex = getCurrentCardIndex();
-        const currentCard = cards[currentIndex];
-
-        const required = currentCard.querySelectorAll('input[required], select[required]');
-        let valid = true;
-
-        required.forEach(field => {
-            if (!field.value.trim()) {
-                field.style.borderColor = '#dc2626';
-                valid = false;
-            } else {
-                field.style.borderColor = '';
-            }
-        });
-
-        if (!valid) {
-            alert("Please fill all required fields (*) before continuing.");
-        }
-        return valid;
-    }
-
-    // ====================== SAME ADDRESS LOGIC (Improved) ======================
-    function syncPermanentAddress() {
-        if (!sameAddressCheck.checked) {
-            permanentSection.style.display = 'block';
-            return;
-        }
-
-        // Copy values
-        const fields = [
-            { from: 'House no.', to: 'House no.' },
-            { from: 'Street / Purok / Sitio', to: 'Street / Purok / Sitio' },
-            { from: 'Barangay', to: 'Barangay' },
-            { from: 'City / Municipality', to: 'City / Municipality' },
-            { from: 'Province', to: 'Province' },
-            { from: 'Region', to: 'Region' }
-        ];
-
-        const currentSections = document.querySelectorAll('.row-address, .row-thirds');
-        const currentInputs = Array.from(currentSections[0].querySelectorAll('input, select'));
-        const permInputs = Array.from(document.querySelectorAll('#permanent-address-section input, #permanent-address-section select'));
-
-        currentInputs.forEach((input, i) => {
-            if (permInputs[i]) {
-                permInputs[i].value = input.value;
-            }
-        });
-
-        permanentSection.style.display = 'none';
-    }
-
-    sameAddressCheck.addEventListener('change', () => {
-        syncPermanentAddress();
-    });
-
-    // Auto-copy when current address changes and checkbox is checked
-    document.querySelectorAll('#permanent-address-section').forEach(section => {
-        section.addEventListener('input', () => {
-            if (sameAddressCheck.checked) syncPermanentAddress();
-        });
-    });
-
-    // ====================== HOUSEHOLD REPEATER ======================
-    function createMemberRow(type) {
-        const id = Date.now();
-        let title = '';
-
-        switch(type) {
-            case 'adult':  title = 'Adult Member'; break;
-            case 'child':  title = 'Dependent Child'; break;
-            case 'senior': title = 'Senior Citizen'; break;
-            case 'pwd':    title = 'PWD Member'; break;
-        }
-
-        const rowHTML = `
-            <div class="nested-form-block repeater-row" data-type="${type}">
-                <div class="repeater-section-header">
-                    <div class="form-section-label">${title}</div>
-                    <button type="button" class="btn-remove-item" style="background:none;border:none;color:#dc2626;font-size:1.4rem;cursor:pointer;">×</button>
-                </div>
-                <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
-                    <div class="form-group">
-                        <label>Full Name <span class="req">*</span></label>
-                        <input type="text" required placeholder="Full name">
-                    </div>
-                    <div class="form-group">
-                        <label>Relationship to Applicant</label>
-                        <input type="text" placeholder="e.g. Spouse, Daughter, Mother">
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Birth</label>
-                        <input type="date">
-                    </div>
-                    ${type === 'child' || type === 'pwd' ? `
-                    <div class="form-group">
-                        <label>Age</label>
-                        <input type="number" min="0" max="120" placeholder="Age">
-                    </div>` : ''}
-                </div>
-            </div>
-        `;
-
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = rowHTML;
-        const row = tempDiv.firstElementChild;
-
-        // Remove button
-        row.querySelector('.btn-remove-item').addEventListener('click', () => {
-            row.remove();
-            updateHouseholdCounts();
-        });
-
-        return row;
-    }
-
-    function updateHouseholdCounts() {
-        const counts = {
-            adult:  containers.adult.querySelectorAll('.repeater-row').length,
-            child:  containers.child.querySelectorAll('.repeater-row').length,
-            senior: containers.senior.querySelectorAll('.repeater-row').length,
-            pwd:    containers.pwd.querySelectorAll('.repeater-row').length,
-        };
-
-        totalCountEl.textContent = 1 + counts.adult + counts.child + counts.senior + counts.pwd;
-        adultCountEl.textContent  = counts.adult;
-        childCountEl.textContent  = counts.child;
-        seniorCountEl.textContent = counts.senior;
-        pwdCountEl.textContent    = counts.pwd;
-    }
-
-    // Add buttons
-    btnAddAdult.addEventListener('click', () => {
-        containers.adult.appendChild(createMemberRow('adult'));
-        updateHouseholdCounts();
-    });
-
-    btnAddChild.addEventListener('click', () => {
-        containers.child.appendChild(createMemberRow('child'));
-        updateHouseholdCounts();
-    });
-
-    btnAddSenior.addEventListener('click', () => {
-        containers.senior.appendChild(createMemberRow('senior'));
-        updateHouseholdCounts();
-    });
-
-    btnAddPWD.addEventListener('click', () => {
-        containers.pwd.appendChild(createMemberRow('pwd'));
-        updateHouseholdCounts();
-    });
-    // ====================== FINAL SUBMISSION ======================
-    const submitBtn = document.querySelector('.btn--submit');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            const terms = document.getElementById('terms-cond');
-            const consent = document.getElementById('data-consent');
-            const sigName = document.getElementById('sig-name');
-
-            if (!terms || !terms.checked || !consent || !consent.checked) {
-                alert("Please agree to both Terms & Conditions and Data Consent.");
-                return;
-            }
-
-            if (!sigName || !sigName.value.trim()) {
-                alert("Please enter your full name as signature.");
-                sigName.focus();
-                return;
-            }
-
-            submitBtn.textContent = "Submitting Application...";
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                alert("✅ Your application has been successfully submitted!\n\nThank you for applying to KWARTA.");
-                // Optional: Reset or redirect
-                // window.location.reload();
-            }, 1800);
-        });
-    }
-
-    // ====================== INITIAL SETUP ======================
-    updateHouseholdCounts();
-
-    // Optional: Auto-copy address when fields change
-    document.querySelectorAll('.row-address input, .row-thirds input, .row-thirds select').forEach(el => {
-        el.addEventListener('change', () => {
-            if (sameAddressCheck.checked) syncPermanentAddress();
-        });
-    });
-
-    // Keyboard support
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && document.activeElement.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-        }
-    });
-
+    localStorage.removeItem('currentUser');
+    
+    // alert("You have logged out securely.");
+    window.location.href = "homePage.html";
 });
+
+
+
+// ─── 0. Medical History: toggle relationship input ───────────────────
+        function toggleRelInput(radio) {
+            const row = radio.closest('.med-rel-row');
+            const relInput = row.querySelector('.med-rel-rel input');
+            if (radio.value === 'yes') {
+                relInput.disabled = false;
+                relInput.focus();
+            } else {
+                relInput.disabled = true;
+                relInput.value = '';
+            }
+        }
+
+        // ─── 1. Conditional Document Requirements ────────────────────────────
+        function updateDocRequirements() {
+            const isSoloParent = document.getElementById('solo-yes').checked;
+            const hasHouseholdMembers =
+                document.querySelectorAll('#container-senior .nested-form-block').length > 0 ||
+                document.querySelectorAll('#container-pwd .nested-form-block').length > 0 ||
+                document.querySelectorAll('#container-child .nested-form-block').length > 0;
+
+            const reqHousehold = document.getElementById('doc-req-household');
+            const reqIndigency = document.getElementById('doc-req-indigency');
+            const section      = document.getElementById('doc-conditional-section');
+
+            reqHousehold.style.display = hasHouseholdMembers ? '' : 'none';
+            reqIndigency.style.display = isSoloParent        ? '' : 'none';
+            section.style.display      = (hasHouseholdMembers || isSoloParent) ? '' : 'none';
+        }
+
+        // Wire solo parent radio
+        document.querySelectorAll('input[name="soloParent"]').forEach(r =>
+            r.addEventListener('change', updateDocRequirements)
+        );
+        updateDocRequirements();
+
+        // ─── 1. Scroll Progress Bar ──────────────────────────────────────────
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('scrollBar').style.width = (winScroll / height * 100) + '%';
+        });
+
+        // ─── 2. Sidebar ScrollSpy ────────────────────────────────────────────
+        const highlight = document.getElementById('active-highlight');
+        const navItems  = document.querySelectorAll('.step-item');
+        const formSections = document.querySelectorAll('.form-panel');
+
+        function moveHighlight(el) {
+            if (!el) return;
+            highlight.style.transform = `translateY(${el.offsetTop}px)`;
+            highlight.style.height    = `${el.offsetHeight}px`;
+            navItems.forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        window.addEventListener('load', () => moveHighlight(document.querySelector('.step-item.active')));
+        navItems.forEach(item => item.addEventListener('click', function () { moveHighlight(this); }));
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('hidden-step')) {
+                    const link = document.querySelector(`.step-item[href="#${entry.target.id}"]`);
+                    moveHighlight(link);
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+        formSections.forEach(s => observer.observe(s));
+
+        // ─── 3. Same-address Logic ───────────────────────────────────────────
+        const currInputs = ['curr-house','curr-street','curr-brgy','curr-city','curr-prov','curr-reg'];
+        const permInputs = ['perm-house','perm-street','perm-brgy','perm-city','perm-prov','perm-reg'];
+        const sameChk    = document.getElementById('same-address');
+
+        function checkCurrentFilled() {
+            const allFilled = currInputs.every(id => document.getElementById(id).value);
+            sameChk.disabled = !allFilled;
+            if (!allFilled && sameChk.checked) { sameChk.checked = false; syncPermanent(false); }
+        }
+
+        function syncPermanent(isSame) {
+            permInputs.forEach((pid, i) => {
+                const pe = document.getElementById(pid), ce = document.getElementById(currInputs[i]);
+                pe.value    = isSame ? ce.value : '';
+                pe.disabled = isSame;
+            });
+        }
+
+        currInputs.forEach(id => {
+            document.getElementById(id).addEventListener('input',  checkCurrentFilled);
+            document.getElementById(id).addEventListener('change', checkCurrentFilled);
+        });
+        sameChk.addEventListener('change', e => syncPermanent(e.target.checked));
+        checkCurrentFilled();
+
+        // ─── 4. Household Repeater ───────────────────────────────────────────
+        function updateHouseholdCounts() {
+            const counts = {
+                adult:  document.querySelectorAll('#container-adult  .nested-form-block').length,
+                child:  document.querySelectorAll('#container-child  .nested-form-block').length,
+                senior: document.querySelectorAll('#container-senior .nested-form-block').length,
+                pwd:    document.querySelectorAll('#container-pwd    .nested-form-block').length,
+            };
+            document.getElementById('count-adult').textContent  = counts.adult;
+            document.getElementById('count-child').textContent  = counts.child;
+            document.getElementById('count-senior').textContent = counts.senior;
+            document.getElementById('count-pwd').textContent    = counts.pwd;
+            document.getElementById('count-total').textContent  = 1 + counts.adult + counts.child + counts.senior + counts.pwd;
+        }
+
+        function reindexBlocks(containerId, prefix) {
+            document.getElementById(containerId)
+                .querySelectorAll('.nested-form-block')
+                .forEach((block, i) => {
+                    block.querySelector('.nested-block-title').textContent = `${prefix} #${i + 1}`;
+                });
+        }
+
+        function addBlock(containerId, templateId, prefix) {
+            const container = document.getElementById(containerId);
+            const clone     = document.getElementById(templateId).content.cloneNode(true);
+
+            clone.querySelector('.btn-remove-item').addEventListener('click', function (e) {
+                e.target.closest('.nested-form-block').remove();
+                reindexBlocks(containerId, prefix);
+                updateHouseholdCounts();
+                updateDocRequirements();
+            });
+
+            container.appendChild(clone);
+            reindexBlocks(containerId, prefix);
+            updateHouseholdCounts();
+            updateDocRequirements();
+        }
+
+        document.getElementById('btn-add-adult') .addEventListener('click', () => addBlock('container-adult',  'tmpl-adult',  'Adult Member'));
+        document.getElementById('btn-add-child') .addEventListener('click', () => addBlock('container-child',  'tmpl-child',  'Dependent Child'));
+        document.getElementById('btn-add-senior').addEventListener('click', () => addBlock('container-senior', 'tmpl-senior', 'Senior Citizen'));
+        document.getElementById('btn-add-pwd')   .addEventListener('click', () => addBlock('container-pwd',    'tmpl-pwd',    'PWD Member'));
+
+        // ─── 5. Step 6 → Step 7 Lock Flow ───────────────────────────────────
+        const stepPanels = ['step-1','step-2','step-3','step-4','step-5','step-6'].map(id => document.getElementById(id));
+        const step7Panel = document.getElementById('step-7');
+        const step7Link  = document.querySelector('.step-item[href="#step-7"]');
+
+        document.getElementById('btn-unlock-step7').addEventListener('click', () => {
+            const terms   = document.getElementById('terms-cond').checked;
+            const consent = document.getElementById('data-consent').checked;
+            const sigName = document.getElementById('sig-name').value.trim();
+
+            if (!terms || !consent) { alert('Please check both the Terms and Conditions and Data Processing Consent to continue.'); return; }
+            if (!sigName)           { alert('Please type your printed name as a signature to continue.'); return; }
+
+            stepPanels.forEach(p => p.classList.add('locked-step'));
+            step7Panel.classList.remove('hidden-step');
+            if (step7Link) { step7Link.style.pointerEvents = ''; step7Link.style.opacity = ''; }
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        });
+
+        document.getElementById('btn-go-back').addEventListener('click', () => {
+            stepPanels.forEach(p => p.classList.remove('locked-step'));
+            step7Panel.classList.add('hidden-step');
+            if (step7Link) { step7Link.style.pointerEvents = 'none'; step7Link.style.opacity = '0.5'; }
+            document.getElementById('step-6').scrollIntoView({ behavior: 'smooth' });
+        });
+        // ─── 6. Navbar: hide Apply link after final submission ───────────────
+        const navApply = document.getElementById('nav-apply');
+        const btnFinalSubmit = document.getElementById('btn-final-submit');
+        if (btnFinalSubmit) {
+            btnFinalSubmit.addEventListener('click', () => {
+                if (navApply) navApply.style.display = 'none';
+            });
+        }

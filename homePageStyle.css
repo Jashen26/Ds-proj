@@ -5,6 +5,22 @@
   scrollbar-width: none;
 }
 
+
+html {
+  scroll-behavior: smooth;
+}
+
+#heroSec {
+  scroll-margin-top: 100px;
+}
+
+#servicesSec {
+  scroll-margin-top: 100px;
+}
+
+
+
+
 :root {
   --primaryColor: #091c39;
   --secondaryColor: #1E40AF;
@@ -30,22 +46,25 @@ body {
 
 header {
   position: absolute;
-  /* position: fixed; */
+  position: fixed;
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100px;
   width: 100%;
-  background-color: var(--primaryColor);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); */
   z-index: 10;
 }
 
 header nav {
   display: flex;
+  padding: 10px 50px;
   width: 90%;
+  height: 80%;
+  border-radius: 70px;
   justify-content: space-between;
-  padding: 10px;
-  background-color: transparent;
+  background-color: var(--primaryColor);
 }
 
 .HPlogo {
@@ -64,6 +83,7 @@ header nav {
 .nav-link {
   display: flex;
   align-items: center;
+  font-weight: 700;
 }
 
 .nav-link ul {
@@ -94,7 +114,7 @@ header nav {
 .HPlogin-btn {
   font-size: 20px;
   padding: 16px 20px 16px 20px;
-  border-radius: 10px;
+  border-radius: 70px;
   background-color: var(--accentColor);
   color: var(--darkNeutral);
   font-weight: 700;
@@ -102,7 +122,7 @@ header nav {
 
 .HPsignup-btn {
   padding: 13px;
-  border-radius: 10px;
+  border-radius: 70px;
   background-color: var(--secondaryColor);
   color: var(--lightNeutral)
 }
@@ -310,6 +330,7 @@ header nav {
 }
 
 .rounded-edge2 {
+  transform: translateY(-60px);
   height: 67px;
   width: 100%;
   /* aspect-ratio: 3/2; */
@@ -320,114 +341,503 @@ header nav {
   background: var(--primaryColor);
 }
 
+/* ------------------------------------------------------------------------ */
 .services {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 1200px;
+  height: auto;
   width: 100%;
+  margin-bottom: 200px;
   /* background-color: rgb(31, 188, 188); */
 }
 
 .serviceText {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-  margin: 150px 0 100px 0;
+  margin: 55px 0 200px 0;
 }
 
 .serviceText p {
-  position: relative;
-  transform: translateY(-250%);
-  font-size: 16px;
+  display: flex;
+  font-size: 100px;
+  scale: 1.6;
+  opacity: 0.4;
   font-weight: 700;
-  color: var(--secondaryColor);
-  opacity: 0.5;
+  margin-bottom: 40px;
+  color: var(--primaryColor);
+  /* opacity: 0.5; */
+  animation: fade-Zoom linear;
+  animation-timeline: view();
+  animation-range: cover 0px;
 }
 
-.serviceText h1 {
+
+/* .serviceText h1 {
+  margin-top: px;
+  font-size: 16px;
   width: 500px;
+  opacity: 0;
   text-align: center;
   color: var(--primaryColor);
   margin-bottom: 10px;
-}
+  animation: fade-Zoom linear;
+  animation-timeline: view();
+  animation-range: cover contain;
+} */
 
-.serviceText h3 {
-  width: 700px;
+.serviceText h4 {
+  font-size: 24px;
+  width: 870px;
+  margin-top: 30px;
+  scale: 1.6;
+  opacity: 0;
   text-align: center;
+  animation: fade-Zoom linear;
+  animation-timeline: view();
+  animation-range: cover contain;
 }
 
+/* ----------------------------------------------------------- */
 .serviceGrid {
   display: grid;
-  height: 1200px;
-  width: 1500px;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  height: auto;
+  width: 100%;
+  grid-template-columns: 1fr;
   gap: 50px;
 }
 
-.serviceGrid div p {
-  position: relative;
-  font-size: 2.3rem;
-  /* left: -34px; */
-  top: 48px;
-  /*top:24px;*/
-  color: var(--lightNeutral)
-}
-
-.serviceGrid div img {
-  object-fit: contain;
-  position: relative;
-  top: 24px;
-  /* left: 24px; */
-  height: 100px;
-  width: 100px;
-  background-color: var(--lightNeutral);
-  padding: 18px;
-  border-radius: 20px;
-  /* filter: invert(1); */
-}
 
 .serviceGrid div {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction:-reverse;
+  height: 600px;
   background-color: var(--primaryColor);
-  border-radius: 10%;
-  box-shadow: 0px 0px 1px 1px;
-  /* overflow: hidden; */
 }
 
-.serviceGrid {
-  display: grid;
-  height: 800px;
-  width: 1000px;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 50px;
-  padding-bottom: 100px;
+.food, .education, .HHbills, .health, .transpo, .funeral {
+  /* opacity: 0; */
+  animation: fade-inZoomCard linear;
+  animation-timeline: view();
+  animation-range: cover 0px;
 }
 
-.food h1 {
+@keyframes fade-inZoomCard {
+  0% {
+    scale: 0.3;
+  }
+
+  40% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  70% {
+    scale: 1;
+    opcaity: 1
+  }
+
+  100% {
+    scale: 0.7;
+    opcaity: 1
+  }
+}
+
+
+.food-left {
   position: relative;
-  text-align: left;
-  max-width: 200px;
-  top: 40px;
-  left: 34px;
-  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.food-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to top,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to right,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    radial-gradient(ellipse 80% 100% at 20% 50%,
+      transparent 25%,
+      var(--primaryColor) 90%);
+}
+
+.food-left img {
+  object-fit: cover;
+  width: auto;
+  height: 100%;
+}
+
+.food-right {
   color: var(--lightNeutral);
-  display: none;
-
-}
-
-.food h2 {
   position: relative;
-  bottom: -70px;
-  left: 40px;
-  font-size: 0.69rem;
-  color: var(--accentColor);
-  display: none;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
 }
+
+.food-right img {
+  margin-left: 23px;
+  margin-top: 160px;
+  filter: invert(1);
+  height: 50px;
+  width: 50px;
+}
+
+.food-right h1 {
+  margin-left: 9px;
+}
+
+.food-right p {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: 200;
+  opacity: 0.6;
+  width: 600px;
+}
+
+/*  */
+.education-left {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.education-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to top,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to right,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    radial-gradient(ellipse 80% 100% at 20% 50%,
+      transparent 25%,
+      var(--primaryColor) 90%);
+}
+
+.education-left img {
+  object-fit: cover;
+  width: auto;
+  height: 100%;
+}
+
+.education-right {
+  color: var(--lightNeutral);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+.education-right img {
+  margin-left: 23px;
+  margin-top: 160px;
+  filter: invert(1);
+  height: 50px;
+  width: 50px;
+}
+
+.education-right h1 {
+  margin-left: 9px;
+}
+
+.education-right p {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: 200;
+  opacity: 0.6;
+  width: 600px;
+}
+/*  */
+
+.HHbills-left {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.HHbills-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to top,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to right,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    radial-gradient(ellipse 80% 100% at 20% 50%,
+      transparent 25%,
+      var(--primaryColor) 90%);
+}
+
+.HHbills-left img {
+  object-fit: cover;
+  width: auto;
+  height: 100%;
+}
+
+.HHbills-right {
+  color: var(--lightNeutral);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+.HHbills-right img {
+  margin-left: 23px;
+  margin-top: 160px;
+  filter: invert(1);
+  height: 50px;
+  width: 50px;
+}
+
+.HHbills-right h1 {
+  margin-left: 9px;
+}
+
+.HHbills-right p {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: 200;
+  opacity: 0.6;
+  width: 600px;
+}
+
+/*  */
+
+.health-left {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.health-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to top,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to right,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    radial-gradient(ellipse 80% 100% at 20% 50%,
+      transparent 25%,
+      var(--primaryColor) 90%);
+}
+
+.health-left img {
+  object-fit: cover;
+  width: auto;
+  height: 100%;
+}
+
+.health-right {
+  color: var(--lightNeutral);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+.health-right img {
+  margin-left: 23px;
+  margin-top: 160px;
+  filter: invert(1);
+  height: 50px;
+  width: 50px;
+}
+
+.health-right h1 {
+  margin-left: 9px;
+}
+
+.health-right p {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: 200;
+  opacity: 0.6;
+  width: 600px;
+}
+
+/*  */
+
+.transpo-left {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.transpo-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to top,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to right,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    radial-gradient(ellipse 80% 100% at 20% 50%,
+      transparent 25%,
+      var(--primaryColor) 90%);
+}
+
+.transpo-left img {
+  object-fit: cover;
+  width: auto;
+  height: 100%;
+}
+
+.transpo-right {
+  color: var(--lightNeutral);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+.transpo-right img {
+  margin-left: 23px;
+  margin-top: 160px;
+  filter: invert(1);
+  height: 50px;
+  width: 50px;
+}
+
+.transpo-right h1 {
+  margin-left: 9px;
+}
+
+.transpo-right p {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: 200;
+  opacity: 0.6;
+  width: 600px;
+}
+/*  */
+
+.funeral-left {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.funeral-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to top,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    linear-gradient(to right,
+      var(--primaryColor) 0%,
+      transparent 25%),
+    radial-gradient(ellipse 80% 100% at 20% 50%,
+      transparent 25%,
+      var(--primaryColor) 90%);
+}
+
+.funeral-left img {
+  object-fit: cover;
+  width: auto;
+  height: 100%;
+}
+
+.funeral-right {
+  color: var(--lightNeutral);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+.funeral-right img {
+  margin-left: 23px;
+  margin-top: 160px;
+  filter: invert(1);
+  height: 50px;
+  width: 50px;
+}
+
+.funeral-right h1 {
+  margin-left: 9px;
+}
+
+.funeral-right p {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: 200;
+  opacity: 0.6;
+  width: 600px;
+}
+
+
 
 
 /* to follow description animation */
@@ -488,7 +898,6 @@ header nav {
 }
 
 .step-by-step p {
-
   margin: 20px auto;
   font-size: 1.2rem;
   color: var(--lightNeutral);
@@ -548,8 +957,8 @@ header nav {
 }
 
 footer {
-  /* display: flex; */
-  height: 400px;
+  height: auto;
+  width:100%;
   background-color: var(--primaryColor);
   box-shadow: 0px 12px 20px 1px var(--lightNeutral);
 }
@@ -564,7 +973,7 @@ footer {
   display: flex;
   flex-direction: column;
   width: 400px;
-  height:auto;
+  height: auto;
 }
 
 .Flogo img {
@@ -585,63 +994,115 @@ footer {
 
 #socialIcon {
   position: relative;
-  left:37px;
-  top:23px;
-  margin-left:46px;
+  left: 37px;
+  top: 23px;
+  margin-left: 46px;
   width: 40px;
   height: 40px;
-  filter:invert(1);
+  filter: invert(1);
   opacity: 0.5;
 }
 
-.Qlink, .Fcontact {
+.Qlink,
+.Fcontact {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  position:relative;
-  left:-50px;
+  position: relative;
+  left: -50px;
 }
 
-.Qlink h2, .Fcontact h2 {
-  color:var(--lightNeutral);
-  text-transform:uppercase;
+.Qlink h2,
+.Fcontact h2 {
+  color: var(--lightNeutral);
+  text-transform: uppercase;
 }
-.Qlink ul, .Fcontact ul {
+
+.Qlink ul,
+.Fcontact ul {
+  /* text-align:center; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  color:var(--lightNeutral);
+  color: var(--lightNeutral);
   list-style: none;
 }
-.Qlink li , .Fcontact li {
+
+.Qlink li,
+.Fcontact li {
   margin-bottom: 10px;
 }
 
+.Qlink ul li a {
+  text-decoration: none;
+  list-style: none;
+  color: var(--lightNeutral);
+}
 .copyRight {
+  margin: 20px;
   height: auto;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  color:var(--lightNeutral);
+  color: var(--lightNeutral);
 }
 
 .copyRightText {
   display: flex;
   position: relative;
-  top:10px
+  /* top: 10px; */
 }
 
 .copyRightText img {
-  width:13px;
-  height:13px;
-  filter:invert();
+  width: 13px;
+  height: 13px;
+  filter: invert();
 }
 
 .footerLinks li {
   position: relative;
-  top:10px;
-  display:flex;
-  gap:70px;
+  /* top: 10px; */
+  display: flex;
+  gap: 70px;
   list-style: none;
 }
+
+.footerLinks li ul a {
+  text-decoration: none;
+  list-style: none;
+  color: var(--lightNeutral);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------- */
+
+@keyframes fade-Zoom {
+  0% {
+    /* opacity: 0; */
+    scale: 0;
+  }
+
+  70% {
+    opacity: 1;
+    scale: 1.7;
+  }
+
+  90% {
+    scale: 1.4;
+    opacity: 0.4;
+  }
+}
+

@@ -11,7 +11,7 @@
     <div class="login-split-container">
         
         <div class="login-left-graphic">
-            <img src="images/Login.png" alt="" class="login-image">
+            <img src="images/Login.jpg" alt="" class="login-image">
         </div>
 
         <div class="login-right-form-side">
@@ -21,24 +21,24 @@
                 <h6>Welcome to K.W.A.R.T.A.!</h6>
                 <br>
                 <div class="texts">
-                    <input type="text" placeholder="Username" class="login-field">
-                    <input type="password" placeholder="Password" class="login-field">
+                    <input type="email" id="loginEmail" placeholder="Email" class="login-field">
+                    <input type="password" id="loginPassword" placeholder="Password" class="login-field">
                 </div>
                 <br>
-                <div class="options">
+                <!-- <div class="options">
                     <div class="remember">
                         <input type="checkbox" id="remember" name="remember">
                         <label for="remember">Remember me</label>
                     </div>
                     <button type="button" class="btn-ghost">Forgot password</button>
-                </div>
-                <div> <button type="button" class="btn-solid">Log in</button></div>
+                </div> -->
+                <div> <button type="button" class="btn-solid" id="loginBtn">Log in</button></div>
                 <hr>
-                <div>Sign up for an account? <button type="button" class="btn-ghost">Sign up</button></div>
+                <div>Sign up for an account? <button type="button" class="btn-ghost" id="goToSignup">Sign up</button></div>
             </div>
 
         </div>
     </div>
-
+<script src="login.js"></script>
 </body>
 </html>
