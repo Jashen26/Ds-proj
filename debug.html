@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KWARTA | Debug</title>
+    <link rel="icon" type="image/png" href="Assets/Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: #0f172a; padding: 2.5rem; max-width: 800px; margin: 0 auto; }
+        h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; }
+        .card { background: white; border: 1px solid #cbd5e1; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: #1e293b; }
+        .card-desc { font-size: 0.85rem; color: #64748b; margin-bottom: 1rem; }
+        .btn { padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; border: none; cursor: pointer; transition: 0.15s; }
+        .btn-danger { background: #ef4444; color: white; }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-secondary { background: #e2e8f0; color: #0f172a; }
+        .btn-secondary:hover { background: #cbd5e1; }
+        .btn-primary { background: #2563eb; color: white; }
+        .btn-primary:hover { background: #1d4ed8; }
+        .log-box { background: #0f172a; color: #10b981; font-family: monospace; padding: 1rem; border-radius: 0.5rem; font-size: 0.85rem; max-height: 250px; overflow-y: auto; white-space: pre-wrap; margin-top: 1rem;}
+        select { padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #cbd5e1; font-family: 'Inter'; font-weight: 600; outline: none;}
+        .toast { display: none; background: #10b981; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; position: fixed; top: 1rem; right: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <div class="toast" id="toast">Action Successful</div>
+
+    <h1>🔧 Local Database Manager</h1>
+
+    <div class="card">
+        <div class="card-title">1. Master Reset</div>
+        <div class="card-desc">Completely wipe all registered accounts, active logins, and submitted applications.</div>
+        <button class="btn btn-danger" id="btn-nuke">Wipe Entire Database</button>
+    </div>
+
+    <div class="card">
+        <div class="card-title">2. Create Test Environment</div>
+        <div class="card-desc">Injects a pre-verified test user and immediately logs you in so you can test the application.</div>
+        <button class="btn btn-primary" id="btn-seed">Inject Test User (test@kwarta.com)</button>
+    </div>
+
+    <div class="card">
+        <div class="card-title">3. Application Lifecycle</div>
+        <div class="card-desc">Manipulate the currently logged-in user's application.</div>
+        
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; align-items: center;">
+            <select id="status-picker">
+                <option value="pending">Set Status: Under Review</option>
+                <option value="approved">Set Status: Approved</option>
+                <option value="rejected">Set Status: Rejected</option>
+            </select>
+            <button class="btn btn-primary" id="btn-status">Apply Status</button>
+        </div>
+        <button class="btn btn-secondary" id="btn-clear-app">Delete Current Submission (Retake Form)</button>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Live Memory Feed</div>
+        <div class="card-desc">Real-time reflection of your browser's localStorage.</div>
+        <div class="log-box" id="logger">Loading...</div>
+    </div>
+
+    <script>
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 3000);
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            const users = JSON.parse(localStorage.getItem('kwarta_users')) || [];
+            const active = JSON.parse(localStorage.getItem('kwarta_activeUser'));
+            const log = document.getElementById('logger');
+
+            let output = `--- SYSTEM MEMORY ---\nTotal Registered Accounts: ${users.length}\n\n`;
+
+            if (active) {
+                output += `ACTIVE SESSION:\nName: ${active.name}\nEmail: ${active.email}\n\n`;
+                const userKey = `kwarta_result_${active.email}`;
+                const appData = JSON.parse(localStorage.getItem(userKey));
+                
+                if (appData) {
+                    output += `APPLICATION FOUND:\nStatus: [${appData.status.toUpperCase()}]\nPoints: ${appData.points}/${appData.maxPoints}\nTier: ${appData.level}`;
+                } else {
+                    output += `APPLICATION STATUS:\nNo application submitted yet.`;
+                }
+            } else {
+                output += `ACTIVE SESSION:\nNone. You are logged out.`;
+            }
+            log.textContent = output;
+        }
+
+        // Actions
+        document.getElementById('btn-nuke').addEventListener('click', () => {
+            localStorage.clear();
+            showToast('All data permanently deleted.');
+        });
+
+        document.getElementById('btn-seed').addEventListener('click', () => {
+            const testUser = { name: "Test User", email: "test@kwarta.com", password: "Password123!" };
+            let users = JSON.parse(localStorage.getItem('kwarta_users')) || [];
+            
+            // Only add if doesn't exist
+            if (!users.some(u => u.email === testUser.email)) {
+                users.push(testUser);
+                localStorage.setItem('kwarta_users', JSON.stringify(users));
+            }
+            
+            localStorage.setItem('kwarta_activeUser', JSON.stringify(testUser));
+            showToast('Test user injected and logged in!');
+        });
+
+        document.getElementById('btn-clear-app').addEventListener('click', () => {
+            const active = JSON.parse(localStorage.getItem('kwarta_activeUser'));
+            if (!active) return alert('No active session. Please inject a test user or log in.');
+            
+            localStorage.removeItem(`kwarta_result_${active.email}`);
+            showToast('Submission deleted. Form unlocked.');
+        });
+
+        document.getElementById('btn-status').addEventListener('click', () => {
+            const active = JSON.parse(localStorage.getItem('kwarta_activeUser'));
+            if (!active) return alert('No active session.');
+            
+            const userKey = `kwarta_result_${active.email}`;
+            const appData = JSON.parse(localStorage.getItem(userKey));
+            
+            if (!appData) return alert('This user has not submitted an application yet.');
+            
+            appData.status = document.getElementById('status-picker').value;
+            localStorage.setItem(userKey, JSON.stringify(appData));
+            showToast('Status artificially updated.');
+        });
+
+        // Initialize
+        updateDashboard();
+        
+        // Auto-refresh the log if you switch back to this tab
+        window.addEventListener('focus', updateDashboard);
+    </script>
+</body>
+</html>

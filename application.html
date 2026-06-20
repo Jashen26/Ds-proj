@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KWARTA - Applicant Information</title>
+    <title>KWARTA | Application</title>
     
     <link rel="icon" type="image/png" href="Assets/Logo.png">
 
@@ -11,7 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="application.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/application.css">
 </head>
 <body>
 
@@ -27,8 +28,7 @@
             </div>
             <nav>
                 <ul class="nav-menu">
-                    <li class="nav-item"><a href="#">Dashboard</a></li>
-                    <li class="nav-item" id="nav-apply"><a href="#">Apply</a></li>
+                    <li class="nav-item"><a href="homepage.html">Home</a></li>
                     <li class="nav-item nav-has-dropdown">
                         <span class="nav-trigger">
                             Services
@@ -36,25 +36,15 @@
                         </span>
                         <div class="nav-dropdown">
                             <div class="nav-dropdown-card">
-                                <a href="#">Requirements</a>
-                                <a href="#">FAQs</a>
-                                <a href="#">Contact</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item nav-has-dropdown">
-                        <span class="nav-trigger">
-                            Account
-                            <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                        </span>
-                        <div class="nav-dropdown">
-                            <div class="nav-dropdown-card">
-                                <a href="#">Profile</a>
+                                <a href="application.html" class="nav-apply-btn nav-dropdown-apply">Apply Now</a>
                                 <div class="nav-dropdown-sep"></div>
-                                <a href="#" class="nav-dropdown-danger" id="signOutBtn">Sign Out</a>
+                                <a href="guideline.html">Guidelines</a>
+                                <a href="rules.html">Rules & Regulations</a>
+                                <a href="terms.html">Terms of Service</a>
                             </div>
                         </div>
                     </li>
+                    <li class="nav-item" id="nav-account-item"><!-- populated by auth.js --></li>
                 </ul>
             </nav>
         </header>
@@ -66,14 +56,12 @@
             <aside class="sidebar" id="main-sidebar">
                 <h2 class="sidebar-title">Application Steps</h2>
                 <nav class="steps-list" id="sidebar-nav">
-                    <div class="active-highlight" id="active-highlight"></div>
                     <a href="#step-1" class="step-item active"><span class="step-badge">I</span>Applicant Information</a>
                     <a href="#step-2" class="step-item"><span class="step-badge">II</span>Household Information</a>
                     <a href="#step-3" class="step-item"><span class="step-badge">III</span>Economic Status</a>
-                    <a href="#step-4" class="step-item"><span class="step-badge">IV</span>Medical History</a>
-                    <a href="#step-5" class="step-item"><span class="step-badge">V</span>Document Submission</a>
-                    <a href="#step-6" class="step-item"><span class="step-badge">VI</span>Application Review</a>
-                    <a href="#step-7" class="step-item" style="pointer-events: none; opacity: 0.5;"><span class="step-badge">VII</span>Submission</a>
+                    <a href="#step-5" class="step-item"><span class="step-badge">IV</span>Document Submission</a>
+                    <a href="#step-6" class="step-item"><span class="step-badge">V</span>Application Review</a>
+                    <a href="#step-7" class="step-item locked"><span class="step-badge">VI</span>Submission</a>
                 </nav>
             </aside>
 
@@ -85,10 +73,10 @@
                         
                         <div class="form-section-label">Full Name</div>
                         <div class="form-grid row-name">
-                            <div class="form-group"><label>First name <span>*</span></label><input type="text" placeholder="e.g. Juan"></div>
-                            <div class="form-group"><label>Middle name</label><input type="text" placeholder="e.g. Santos"></div>
-                            <div class="form-group"><label>Surname <span>*</span></label><input type="text" placeholder="e.g. Dela Cruz"></div>
-                            <div class="form-group"><label>Suffixes</label><input type="text" placeholder="e.g. Jr."></div>
+                            <div class="form-group"><label>First name <span>*</span></label><input type="text" id="applicant-firstname" placeholder="e.g. Juan"></div>
+                            <div class="form-group"><label>Middle name</label><input type="text" id="applicant-middlename" placeholder="e.g. Santos"></div>
+                            <div class="form-group"><label>Surname <span>*</span></label><input type="text" id="applicant-surname" placeholder="e.g. Dela Cruz"></div>
+                            <div class="form-group"><label>Suffixes</label><input type="text" id="applicant-suffix" placeholder="e.g. Jr."></div>
                         </div>
 
                         <hr class="form-divider">
@@ -115,15 +103,22 @@
                                     <div class="radio-wrapper"><input type="radio" name="soloParent" id="solo-no" value="No" checked><label for="solo-no">No</label></div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Person with Disability (PWD)?</label>
+                                <div class="radio-group-inline">
+                                    <div class="radio-wrapper"><input type="radio" name="applicantPwd" id="applicant-pwd-yes" value="Yes"><label for="applicant-pwd-yes">Yes</label></div>
+                                    <div class="radio-wrapper"><input type="radio" name="applicantPwd" id="applicant-pwd-no" value="No" checked><label for="applicant-pwd-no">No</label></div>
+                                </div>
+                            </div>
                         </div>
 
                         <hr class="form-divider">
 
                         <div class="form-section-label">Contact Information</div>
                         <div class="form-grid row-contact">
-                            <div class="form-group"><label>Email <span>*</span></label><input type="email" placeholder="e.g. juansantosdelacruz@gmail.com"></div>
-                            <div class="form-group"><label>Contact Number <span>*</span></label><input type="text" placeholder="e.g. 09123456789"></div>
-                            <div class="form-group"><label>Landline number (optional)</label><input type="text" placeholder="e.g. 0281234567"></div>
+                            <div class="form-group"><label>Email <span>*</span></label><input type="email" id="applicant-email" placeholder="e.g. juansantosdelacruz@gmail.com"></div>
+                            <div class="form-group"><label>Contact Number <span>*</span></label><input type="text" id="applicant-contact" placeholder="e.g. 09123456789"></div>
+                            <div class="form-group"><label>Landline number</label><input type="text" placeholder="e.g. 0281234567"></div>
                         </div>
 
                         <hr class="form-divider">
@@ -134,16 +129,17 @@
                             <div class="form-group"><label>Street/Purok/Sitio <span>*</span></label><input type="text" id="curr-street" placeholder="e.g. Banana Rd."></div>
                             <div class="form-group"><label>Barangay <span>*</span></label><input type="text" id="curr-brgy" placeholder="e.g. Singkamas"></div>
                         </div>
-                        <div class="form-grid row-thirds">
+                        <div class="form-grid row-address-extra">
                             <div class="form-group"><label>City/Municipality <span>*</span></label><input type="text" id="curr-city" placeholder="e.g. San Mateo"></div>
                             <div class="form-group">
                                 <label>Province <span>*</span></label>
-                                <select id="curr-prov"><option value="" disabled selected>Select Province</option><option>Metro Manila</option><option>Rizal</option><option>Other</option></select>
+                                <select id="curr-prov" class="province-select"><option value="" disabled selected>Select Province</option></select>
                             </div>
                             <div class="form-group">
-                                <label>Region <span>*</span></label>
-                                <select id="curr-reg"><option value="" disabled selected>Select Region</option><option>NCR</option><option>CALABARZON</option><option>Other</option></select>
+                                <label>Region</label>
+                                <div id="curr-reg" class="region-display is-empty">—</div>
                             </div>
+                            <div class="form-group"><label>Postal Code <span>*</span></label><input type="text" id="curr-postal" placeholder="e.g. 1850"></div>
                         </div>
 
                         <div class="form-section-label">Permanent Address</div>
@@ -158,38 +154,42 @@
                                 <div class="form-group"><label>Street/Purok/Sitio <span>*</span></label><input type="text" id="perm-street" placeholder="e.g. Banana Rd."></div>
                                 <div class="form-group"><label>Barangay <span>*</span></label><input type="text" id="perm-brgy" placeholder="e.g. Singkamas"></div>
                             </div>
-                            <div class="form-grid row-thirds">
+                            <div class="form-grid row-address-extra">
                                 <div class="form-group"><label>City/Municipality <span>*</span></label><input type="text" id="perm-city" placeholder="e.g. San Mateo"></div>
                                 <div class="form-group">
                                     <label>Province <span>*</span></label>
-                                    <select id="perm-prov"><option value="" disabled selected>Select Province</option><option>Metro Manila</option><option>Rizal</option><option>Other</option></select>
+                                    <select id="perm-prov" class="province-select"><option value="" disabled selected>Select Province</option></select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Region <span>*</span></label>
-                                    <select id="perm-reg"><option value="" disabled selected>Select Region</option><option>NCR</option><option>CALABARZON</option><option>Other</option></select>
+                                    <label>Region</label>
+                                    <div id="perm-reg" class="region-display is-empty">—</div>
                                 </div>
+                                <div class="form-group"><label>Postal Code <span>*</span></label><input type="text" id="perm-postal" placeholder="e.g. 1850"></div>
                             </div>
+                        </div>
+
+                        <div class="btn-container">
+                            <button type="button" class="submit-btn" id="next-1">Next</button>
                         </div>
 
                     </form>
                 </section>
 
-                <section class="form-panel" id="step-2">
+                <section class="form-panel hidden-step" id="step-2">
                     <h1 class="form-title">II. Household Information</h1>
                     <form onsubmit="return false;">
-                        
-                        <div class="household-total">
-                            <div class="household-total-label">Total Household Members <small>(Including Applicant)</small></div>
-                            <div class="household-total-count" id="count-total">1</div>
-                        </div>
-                        <div class="household-stat-grid">
-                            <div class="household-stat-card"><div class="household-stat-card-label">Adults</div><div class="household-stat-card-num" id="count-adult">0</div></div>
-                            <div class="household-stat-card"><div class="household-stat-card-label">Children</div><div class="household-stat-card-num" id="count-child">0</div></div>
-                            <div class="household-stat-card"><div class="household-stat-card-label">Senior Citizens</div><div class="household-stat-card-num" id="count-senior">0</div></div>
-                            <div class="household-stat-card"><div class="household-stat-card-label">PWD Members</div><div class="household-stat-card-num" id="count-pwd">0</div></div>
-                        </div>
 
-                        <hr class="form-divider">
+                        <table class="household-summary-table">
+                            <thead>
+                                <tr><th>Category</th><th>Count</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Adult Members</td><td id="count-adult">0</td></tr>
+                                <tr><td>Dependent Children</td><td id="count-child">0</td></tr>
+                                <tr><td>Senior Citizens</td><td id="count-senior">0</td></tr>
+                                <tr class="household-summary-total-row"><td>Total Members</td><td id="count-total">1</td></tr>
+                            </tbody>
+                        </table>
 
                         <div class="repeater-section-header">
                             <div class="form-section-label">Adult Members of the Household</div>
@@ -197,15 +197,11 @@
                         </div>
                         <div id="container-adult"></div>
 
-                        <hr class="form-divider">
-
                         <div class="repeater-section-header">
                             <div class="form-section-label">Dependent Children in the Household</div>
                             <button type="button" class="btn-add-item" id="btn-add-child">+ Add Child</button>
                         </div>
                         <div id="container-child"></div>
-
-                        <hr class="form-divider">
 
                         <div class="repeater-section-header">
                             <div class="form-section-label">Senior Citizens in the Household</div>
@@ -213,18 +209,15 @@
                         </div>
                         <div id="container-senior"></div>
 
-                        <hr class="form-divider">
-
-                        <div class="repeater-section-header">
-                            <div class="form-section-label">PWD Members in the Household</div>
-                            <button type="button" class="btn-add-item" id="btn-add-pwd">+ Add PWD Member</button>
+                        <div class="btn-container" style="justify-content: space-between;">
+                            <button type="button" class="btn-secondary" id="back-2">Previous</button>
+                            <button type="button" class="submit-btn" id="next-2">Next</button>
                         </div>
-                        <div id="container-pwd"></div>
 
                     </form>
                 </section>
 
-                <section class="form-panel" id="step-3">
+                <section class="form-panel hidden-step" id="step-3">
                     <h1 class="form-title">III. Economic Status</h1>
                     <form onsubmit="return false;">
                         <div class="form-section-label">Household Source of Income <span>*</span></div>
@@ -243,6 +236,14 @@
                             <div class="checkbox-wrapper"><input type="checkbox" id="inc-12"><label for="inc-12">Scholarships</label></div>
                             <div class="checkbox-wrapper"><input type="checkbox" id="inc-13"><label for="inc-13">Part-time jobs</label></div>
                             <div class="checkbox-wrapper"><input type="checkbox" id="inc-14"><label for="inc-14">Online Selling</label></div>
+                            <div class="checkbox-wrapper"><input type="checkbox" id="inc-15"><label for="inc-15">Others</label></div>
+                        </div>
+
+                        <div class="form-grid row-halves" style="margin-top: 1.25rem;">
+                            <div class="form-group">
+                                <label>Others, please specify</label>
+                                <input type="text" id="inc-other-text" placeholder="e.g. Sari-sari store earnings">
+                            </div>
                         </div>
 
                         <hr class="form-divider">
@@ -250,7 +251,7 @@
                         <div class="form-grid row-halves">
                             <div class="form-group">
                                 <label>Total Monthly Household Income <span>*</span></label>
-                                <input type="number" placeholder="e.g. 25000">
+                                <input type="number" id="total-income" placeholder="e.g. 25000">
                             </div>
                         </div>
 
@@ -268,200 +269,16 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="btn-container" style="justify-content: space-between;">
+                            <button type="button" class="btn-secondary" id="back-3">Previous</button>
+                            <button type="button" class="submit-btn" id="next-3">Next</button>
+                        </div>
                     </form>
                 </section>
 
-                <section class="form-panel" id="step-4">
-                    <h1 class="form-title">IV. Medical History</h1>
-                    <form onsubmit="return false;">
-
-                        <div class="form-section-label" style="margin-top: 0;">A. Relative Medical History</div>
-                        <p style="color: var(--gray-dark); font-size: 0.875rem; margin-bottom: 1.25rem;">Among your relatives' medical history, have any of them had the following diseases? Select <strong>Yes</strong> and fill in the relationship if applicable.</p>
-
-                        <div class="med-rel-table">
-                            <div class="med-rel-header">
-                                <div>Disease</div>
-                                <div>Yes / No</div>
-                                <div>Relationship (if Yes)</div>
-                            </div>
-                            <!-- Row helper: data-rel-id links radio group to relationship input -->
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Asthma</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-asthma" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-asthma" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Mother" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Kidney Trouble</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-kidney" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-kidney" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Father" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Cancer</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-cancer" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-cancer" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Uncle" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Mental Disorder</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-mental" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-mental" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Sibling" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Convulsion</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-convulsion" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-convulsion" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Grandmother" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Rheumatism</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-rheumatism" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-rheumatism" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Aunt" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Diabetes</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-diabetes" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-diabetes" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Parent" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Skin Disorder</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-skin" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-skin" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Cousin" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Digestive Problems</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-digestive" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-digestive" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Sibling" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Bleeding Tendencies</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-bleeding" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-bleeding" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Uncle" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Heart Problems</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-heart" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-heart" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Father" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Stroke</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-stroke" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-stroke" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Grandfather" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">High Blood Pressure</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-hbp" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-hbp" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Mother" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Tuberculosis</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-tb" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-tb" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Parent" disabled></div>
-                            </div>
-                            <div class="med-rel-row">
-                                <div class="med-rel-disease">Others</div>
-                                <div class="med-rel-radios">
-                                    <div class="radio-wrapper"><input type="radio" name="rel-others" value="yes" onchange="toggleRelInput(this)"><label>Yes</label></div>
-                                    <div class="radio-wrapper"><input type="radio" name="rel-others" value="no" checked onchange="toggleRelInput(this)"><label>No</label></div>
-                                </div>
-                                <div class="med-rel-rel"><input type="text" placeholder="e.g. Sibling" disabled></div>
-                            </div>
-                            <div class="med-specify-row">
-                                <input type="text" placeholder="If Others — please specify the disease">
-                            </div>
-                        </div>
-
-                        <hr class="form-divider">
-
-                        <div class="form-section-label">B. Personal Diagnosis History</div>
-                        <p style="color: var(--gray-dark); font-size: 0.875rem; margin-bottom: 1.25rem;">Have you ever been diagnosed with any of the following?</p>
-
-                        <div class="diag-checkbox-grid">
-                            <div class="diag-item"><input type="checkbox" id="diag-1"><label for="diag-1">Anemia</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-2"><label for="diag-2">High Blood Pressure</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-3"><label for="diag-3">Rheumatic Fever</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-4"><label for="diag-4">Amoebiasis</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-5"><label for="diag-5">Influenza</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-6"><label for="diag-6">Skin Disease</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-7"><label for="diag-7">Chicken Pox</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-8"><label for="diag-8">Dysmenorrhea</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-9"><label for="diag-9">Small Pox</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-10"><label for="diag-10">Convulsions</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-11"><label for="diag-11">Arthritis</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-12"><label for="diag-12">Syphilis</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-13"><label for="diag-13">Diabetes</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-14"><label for="diag-14">Kidney Diseases</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-15"><label for="diag-15">Thyroid Disorder</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-16"><label for="diag-16">Diphtheria</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-17"><label for="diag-17">Malaria</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-18"><label for="diag-18">Tonsillitis</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-19"><label for="diag-19">Ear Disorder / Defect</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-20"><label for="diag-20">Measles</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-21"><label for="diag-21">Tuberculosis</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-22"><label for="diag-22">Eye Disorder / Defect</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-23"><label for="diag-23">Mumps</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-24"><label for="diag-24">Typhoid Fever</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-25"><label for="diag-25">Gonorrhea</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-26"><label for="diag-26">Mental Problems</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-27"><label for="diag-27">Ulcer (Peptic/Gastric)</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-28"><label for="diag-28">Heart Disease</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-29"><label for="diag-29">Pleurisy</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-30"><label for="diag-30">Skin Ulcers</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-31"><label for="diag-31">Hepatitis</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-32"><label for="diag-32">Pneumonia</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-33"><label for="diag-33">Whooping Cough</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-34"><label for="diag-34">Hernia</label></div>
-                            <div class="diag-item"><input type="checkbox" id="diag-35"><label for="diag-35">Poliomyelitis</label></div>
-                            <div class="diag-specify diag-item">
-                                <input type="checkbox" id="diag-36"><label for="diag-36">Others:</label>
-                                <input type="text" placeholder="Please specify">
-                            </div>
-                        </div>
-
-                    </form>
-                </section>
-
-                <section class="form-panel" id="step-5">
-                    <h1 class="form-title">V. Document Submission</h1>
+                <section class="form-panel hidden-step" id="step-5">
+                    <h1 class="form-title">IV. Document Submission</h1>
                     <p style="color: var(--gray-dark); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1.75rem;">
                         Since documents cannot be uploaded directly here, please submit all required files through our Google Forms link below. Make sure to include your name and ID number so we can match your documents to your application.
                     </p>
@@ -500,10 +317,6 @@
                             <div class="doc-list-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
                             <div class="doc-list-item-body">Proof of Income<small>ITR, payslips, COE, or Affidavit of No Income</small></div>
                         </div>
-                        <div class="doc-list-item">
-                            <div class="doc-list-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-                            <div class="doc-list-item-body">Medical Diagnosis Documents<small>If applicable (from Step IV)</small></div>
-                        </div>
                     </div>
 
                     <!-- Conditional documents — shown by JS based on registration answers -->
@@ -516,7 +329,7 @@
                             </div>
                             <div class="doc-list-item doc-optional" id="doc-req-indigency" style="display: none;">
                                 <div class="doc-list-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-                                <div class="doc-list-item-body">Certificate of Indigency<small>Required because you indicated Solo Parent status in Step I</small></div>
+                                <div class="doc-list-item-body">Solo Parent ID<small>Issued by your local Social Welfare and Development Office (SWDO), required because you indicated Solo Parent status in Step I</small></div>
                             </div>
                         </div>
                     </div>
@@ -532,18 +345,23 @@
                     <div class="nested-form-block" style="margin-top: 1.25rem;">
                         <div class="checkbox-wrapper">
                             <input type="checkbox" id="doc-submitted">
-                            <label for="doc-submitted">I have submitted all required documents through the Google Form above.</label>
+                            <label for="doc-submitted">I have submitted all required documents through the Google Form above. <span>*</span></label>
                         </div>
+                    </div>
+
+                    <div class="btn-container" style="justify-content: space-between;">
+                        <button type="button" class="btn-secondary" id="back-5">Previous</button>
+                        <button type="button" class="submit-btn" id="next-5">Next</button>
                     </div>
                 </section>
 
-                <section class="form-panel" id="step-6">
-                    <h1 class="form-title">VI. Application Review</h1>
+                <section class="form-panel hidden-step" id="step-6">
+                    <h1 class="form-title">V. Application Review</h1>
                     <p style="color: var(--gray-dark); font-size: 0.9375rem; line-height: 1.5; margin-bottom: 1.5rem;">
-                        Please ensure all the information provided in the previous sections is accurate and true. Falsifying documents or providing misleading information may result in the automatic rejection of your application.
+                        Please review your application before submitting. Inaccurate information may result in rejection.
                     </p>
                     
-                    <div class="form-section-label">Applicant Confirmation</div>
+                    <div class="form-section-label">Applicant Confirmation <span>*</span></div>
                     <div class="nested-form-block">
                         <div class="checkbox-wrapper" style="margin-bottom: 1rem;">
                             <input type="checkbox" id="terms-cond">
@@ -559,17 +377,19 @@
                         <p style="font-size: 0.875rem; color: var(--text-dark); margin-bottom: 0.75rem;"><strong>Signature Declaration:</strong> I hereby declare that all information provided in this application is true, correct, and complete.</p>
                         <div class="form-group">
                             <label>Applicant's Printed Name <span>*</span></label>
-                            <input type="text" id="sig-name" placeholder="Type your full name as signature" autocomplete="name">
+                            <input type="text" id="sig-name" placeholder="Type your full name exactly as registered" autocomplete="name">
+                            <span class="field-hint">Must match your registered name: First name + Middle name + Surname</span>
                         </div>
                     </div>
 
-                    <div class="btn-container">
-                        <button type="button" class="submit-btn" id="btn-unlock-step7">Proceed to Final Submission</button>
+                    <div class="btn-container" style="justify-content: space-between;">
+                        <button type="button" class="btn-secondary" id="back-6">Previous</button>
+                        <button type="button" class="submit-btn" id="btn-unlock-step7">Proceed to Submission</button>
                     </div>
                 </section>
 
                 <section class="form-panel hidden-step" id="step-7">
-                    <h1 class="form-title">VII. Application Submission</h1>
+                    <h1 class="form-title">VI. Application Submission</h1>
                     
                     <div class="warning-box">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
@@ -581,8 +401,65 @@
                     </p>
                     
                     <div class="btn-container" style="justify-content: space-between; align-items: center;">
-                        <button type="button" class="btn-secondary" id="btn-go-back">Go Back</button>
+                        <button type="button" class="btn-secondary" id="btn-go-back">Previous</button>
                         <button type="button" class="submit-btn" id="btn-final-submit">Submit Application</button>
+                    </div>
+                </section>
+
+                <section class="form-panel hidden-step results-panel" id="step-results">
+                    <div class="results-card">
+                        <div class="results-check-circle">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+
+                        <h1 class="results-title">Application Submitted</h1>
+                        <p class="results-subtitle">
+                            Please allow <strong>3&ndash;5 business days</strong> for processing. You will be notified once it is reviewed.
+                        </p>
+
+                        <div class="results-eligibility-box" id="results-eligibility-box">
+                            <div class="results-eligibility-level" id="result-level">&mdash;</div>
+                            <div class="results-eligibility-amount" id="result-amount"></div>
+                            <p class="results-eligibility-note" id="result-note">
+                                This is an estimate based on the information you provided, subject to verification and final approval.
+                            </p>
+                        </div>
+
+                        <button type="button" class="breakdown-toggle" id="breakdown-toggle" aria-expanded="false">
+                            <span class="breakdown-toggle-text">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                How was this calculated?
+                            </span>
+                            <svg class="breakdown-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="breakdown-content" id="breakdown-content">
+                            <div class="breakdown-content-inner">
+                                <div class="breakdown-list" id="breakdown-list"></div>
+                                <div class="breakdown-total-row">
+                                    <span>Total Score</span>
+                                    <span id="breakdown-total-points">&mdash;</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="status-badge" id="status-badge" data-status="pending">
+                            <svg id="status-icon" class="status-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></svg>
+                            <div class="status-text">
+                                <span class="status-label" id="status-label">Under Review</span>
+                                <span class="status-description" id="status-description">Your application and supporting documents are being reviewed.</span>
+                            </div>
+                        </div>
+
+                        <div class="results-info-grid">
+                            <div class="results-info-item">
+                                <span class="results-info-label">Reference Number</span>
+                                <span class="results-info-value" id="result-ref"></span>
+                            </div>
+                            <div class="results-info-item">
+                                <span class="results-info-label">Date Submitted</span>
+                                <span class="results-info-value" id="result-date"></span>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -592,91 +469,88 @@
 
     <template id="tmpl-adult">
         <div class="nested-form-block">
-            <div class="nested-block-header"><span class="nested-block-title">Adult Member</span><button type="button" class="btn-remove-item">Remove Entry</button></div>
+            <div class="nested-block-header">
+                <span class="nested-block-title"></span>
+                <button type="button" class="btn-remove-item" aria-label="Remove entry">×</button>
+            </div>
             <div class="form-grid row-thirds">
                 <div class="form-group"><label>Name <span>*</span></label><input type="text" placeholder="Full Name"></div>
-                <div class="form-group"><label>Sex <span>*</span></label><select><option value="" disabled selected>Select</option><option>Male</option><option>Female</option></select></div>
-                <div class="form-group"><label>Relationship <span>*</span></label><input type="text" placeholder="e.g. Spouse"></div>
-            </div>
-            <div class="form-grid row-halves">
                 <div class="form-group"><label>Date of Birth <span>*</span></label><input type="date"></div>
-                <div class="form-group"><label>Place of Birth <span>*</span></label><input type="text" placeholder="City/Province"></div>
+                <div class="form-group"><label>Sex <span>*</span></label><select><option value="" disabled selected>Select</option><option>Male</option><option>Female</option></select></div>
             </div>
-            <div class="form-grid row-halves">
+            <div class="form-grid row-thirds">
+                <div class="form-group"><label>Relationship <span>*</span></label><input type="text" placeholder="e.g. Spouse"></div>
                 <div class="form-group"><label>Occupation <span>*</span></label><input type="text" placeholder="Job Title / Role"></div>
-                <div class="form-group"><label>Monthly Income <span>*</span></label><input type="number" placeholder="e.g. 15000"></div>
-            </div>
-            <hr class="form-divider" style="margin: 1rem 0;">
-            <div class="form-grid row-fourths">
                 <div class="form-group">
-                    <label>Valid ID Type <span>*</span></label>
-                    <select>
-                        <option value="" disabled selected>Select ID</option><option>Philsys</option><option>Philippine Passport</option><option>Driver's License</option><option>UMID</option><option>Postal ID</option><option>PhilHealth ID</option><option>Voters ID</option><option>Others</option>
-                    </select>
+                    <label>Person with Disability (PWD)?</label>
+                    <div class="radio-group-inline">
+                        <div class="radio-wrapper"><input type="radio" name="pwd-adult-__idx__" value="Yes" class="member-pwd-yes"><label>Yes</label></div>
+                        <div class="radio-wrapper"><input type="radio" name="pwd-adult-__idx__" value="No" class="member-pwd-no" checked><label>No</label></div>
+                    </div>
                 </div>
-                <div class="form-group"><label>If Others (Please specify)</label><input type="text" placeholder="Specify ID type"></div>
-                <div class="form-group"><label>ID Number <span>*</span></label><input type="text" placeholder="ID Number"></div>
-                <div class="form-group"><label>Date of Issue</label><input type="date"></div>
             </div>
         </div>
     </template>
 
     <template id="tmpl-child">
         <div class="nested-form-block">
-            <div class="nested-block-header"><span class="nested-block-title">Dependent Child</span><button type="button" class="btn-remove-item">Remove Entry</button></div>
+            <div class="nested-block-header">
+                <span class="nested-block-title"></span>
+                <button type="button" class="btn-remove-item" aria-label="Remove entry">×</button>
+            </div>
             <div class="form-grid row-thirds">
                 <div class="form-group"><label>Name <span>*</span></label><input type="text" placeholder="Full Name"></div>
+                <div class="form-group"><label>Date of Birth <span>*</span></label><input type="date"></div>
                 <div class="form-group"><label>Sex <span>*</span></label><select><option value="" disabled selected>Select</option><option>Male</option><option>Female</option></select></div>
+            </div>
+            <div class="form-grid row-thirds">
                 <div class="form-group"><label>Relationship <span>*</span></label><input type="text" placeholder="e.g. Son"></div>
+                <div class="form-group"><label>Attending School? <span>*</span></label><select class="child-attending-school"><option value="" disabled selected>Select</option><option>Yes</option><option>No</option></select></div>
+                <div class="form-group">
+                    <label>Person with Disability (PWD)?</label>
+                    <div class="radio-group-inline">
+                        <div class="radio-wrapper"><input type="radio" name="pwd-child-__idx__" value="Yes" class="member-pwd-yes"><label>Yes</label></div>
+                        <div class="radio-wrapper"><input type="radio" name="pwd-child-__idx__" value="No" class="member-pwd-no" checked><label>No</label></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-grid row-thirds">
+                <div class="form-group"><label>School Name</label><input type="text" placeholder="School Name"></div>
+                <div class="form-group"><label>School Address</label><input type="text" placeholder="School Address"></div>
+                <div class="form-group"><label>Grade Level</label><input type="text" placeholder="e.g. Grade 5"></div>
             </div>
             <div class="form-grid row-halves">
-                <div class="form-group"><label>Date of Birth <span>*</span></label><input type="date"></div>
-                <div class="form-group"><label>Place of Birth <span>*</span></label><input type="text" placeholder="City/Province"></div>
-            </div>
-            <hr class="form-divider" style="margin: 1rem 0;">
-            <div class="form-grid row-thirds">
-                <div class="form-group"><label>Attending School? <span>*</span></label><select><option value="" disabled selected>Select</option><option>Yes</option><option>No</option></select></div>
-                <div class="form-group" style="grid-column: span 2;"><label>Reason for not attending (If No)</label><input type="text" placeholder="Reason details..."></div>
-            </div>
-            <div class="form-grid row-thirds">
-                <div class="form-group"><label>Name of School</label><input type="text" placeholder="School Name"></div>
-                <div class="form-group"><label>Address of School</label><input type="text" placeholder="School Address"></div>
-                <div class="form-group"><label>Grade Level</label><input type="text" placeholder="e.g. Grade 5"></div>
+                <div class="form-group"><label>Reason for not attending (If No)</label><input type="text" placeholder="Reason details..."></div>
             </div>
         </div>
     </template>
 
     <template id="tmpl-senior">
         <div class="nested-form-block">
-            <div class="nested-block-header"><span class="nested-block-title">Senior Citizen</span><button type="button" class="btn-remove-item">Remove Entry</button></div>
+            <div class="nested-block-header">
+                <span class="nested-block-title"></span>
+                <button type="button" class="btn-remove-item" aria-label="Remove entry">×</button>
+            </div>
             <div class="form-grid row-thirds">
                 <div class="form-group"><label>Name <span>*</span></label><input type="text" placeholder="Full Name"></div>
+                <div class="form-group"><label>Date of Birth <span>*</span></label><input type="date"></div>
                 <div class="form-group"><label>Sex <span>*</span></label><select><option value="" disabled selected>Select</option><option>Male</option><option>Female</option></select></div>
+            </div>
+            <div class="form-grid row-thirds">
                 <div class="form-group"><label>Relationship <span>*</span></label><input type="text" placeholder="e.g. Grandmother"></div>
-            </div>
-            <div class="form-grid row-halves">
-                <div class="form-group"><label>Date of Birth <span>*</span></label><input type="date"></div>
-                <div class="form-group"><label>Place of Birth <span>*</span></label><input type="text" placeholder="City/Province"></div>
-            </div>
-        </div>
-    </template>
-
-    <template id="tmpl-pwd">
-        <div class="nested-form-block">
-            <div class="nested-block-header"><span class="nested-block-title">PWD Member</span><button type="button" class="btn-remove-item">Remove Entry</button></div>
-            <div class="form-grid row-thirds">
-                <div class="form-group"><label>Name <span>*</span></label><input type="text" placeholder="Full Name"></div>
-                <div class="form-group"><label>Sex <span>*</span></label><select><option value="" disabled selected>Select</option><option>Male</option><option>Female</option></select></div>
-                <div class="form-group"><label>Relationship <span>*</span></label><input type="text" placeholder="e.g. Uncle"></div>
-            </div>
-            <div class="form-grid row-halves">
-                <div class="form-group"><label>Date of Birth <span>*</span></label><input type="date"></div>
-                <div class="form-group"><label>Place of Birth <span>*</span></label><input type="text" placeholder="City/Province"></div>
+                <div class="form-group">
+                    <label>Person with Disability (PWD)?</label>
+                    <div class="radio-group-inline">
+                        <div class="radio-wrapper"><input type="radio" name="pwd-senior-__idx__" value="Yes" class="member-pwd-yes"><label>Yes</label></div>
+                        <div class="radio-wrapper"><input type="radio" name="pwd-senior-__idx__" value="No" class="member-pwd-no" checked><label>No</label></div>
+                    </div>
+                </div>
             </div>
         </div>
     </template>
 
-    <script src="application.js" defer>
+    <script src="js/application.js" defer></script>
+    <script src="js/auth.js" defer></script>
     </script>
 </body>
 </html>

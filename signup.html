@@ -1,44 +1,152 @@
-<!DOCTYPE HTML> 
-<html lang="en">    
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KWARTA SIGNUP</title>
-    <link rel="stylesheet" href="Login.css">
+    <title>KWARTA | Sign Up</title>
+    
+    <link rel="icon" type="image/png" href="Assets/Logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
 
-    <div class="login-split-container">
-        
-        <div class="login-left-graphic">
-            <img src="images/Login.jpg" alt="" class="login-image">
-        </div>
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scrollBar"></div>
+    </div>
 
-        <div class="login-right-form-side">
-            
-            <div class="Container">
-                <h1>WELCOME!</h1>
-                <h6>Welcome to K.W.A.R.T.A.!</h6>
-                <br>
-                <div class="texts">
-                    <input type="email" id="signupEmail" placeholder="Email" class="login-field">
-                    <input type="password"  id="signupPassword" placeholder="Password" class="login-field">
-                </div>
-                <br>
-                <!-- <div class="options">
-                    <div class="remember">
-                        <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">Remember me</label>
-                    </div>
-                    <button type="button" class="btn-ghost">Forgot password</button>
-                </div> -->
-                <div> <button type="button" class="btn-solid" id="signupBtn">Sign up</button></div>
-                <hr>
-                <div>Already has an account? <button type="button" class="btn-ghost" id="goToLogin">Log in</button></div>
+    <div class="navbar-wrapper">
+        <header class="navbar">
+            <div class="logo-container">
+                <img src="Assets/Logo.png" alt="Kwarta Logo" class="logo-img">
+                kwarta
             </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="homepage.html">Home</a></li>
+                    <li class="nav-item nav-has-dropdown">
+                        <span class="nav-trigger">
+                            Services
+                            <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                        <div class="nav-dropdown">
+                            <div class="nav-dropdown-card">
+                                <a href="application.html" class="nav-apply-btn nav-dropdown-apply">Apply Now</a>
+                                <div class="nav-dropdown-sep"></div>
+                                <a href="guideline.html">Guidelines</a>
+                                <a href="rules.html">Rules & Regulations</a>
+                                <a href="terms.html">Terms of Service</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" id="nav-account-item"><!-- populated by auth.js --></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <div class="main-wrapper auth-wrapper">
+        <div class="auth-container">
+            
+            <!-- LOGIN PANEL -->
+            <section class="form-panel" id="login-panel">
+                <h1 class="form-title">Login to an Existing Account</h1>
+                <div id="login-error" class="auth-error"></div>
+                <form onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="login-email" placeholder="Enter your email" autocomplete="email">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.5rem;">
+                        <label>Password</label>
+                        <div class="pwd-wrapper">
+                            <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password">
+                            <button type="button" class="pwd-toggle" aria-label="Toggle password visibility">
+                                <!-- Eye open -->
+                                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <!-- Eye closed (hidden by default) -->
+                                <svg class="eye-closed hidden-step" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: right; margin-bottom: 1.5rem;">
+                        <a href="#" style="font-size: 0.8125rem; color: var(--accent); font-weight: 500; text-decoration: none;">Forgot Password?</a>
+                    </div>
+
+                    <button type="button" class="submit-btn" id="btn-login">Log In</button>
+
+                    <p class="auth-toggle-text">
+                        Don't have an account? <span class="auth-toggle-link" id="show-signup">Sign up</span>
+                    </p>
+                </form>
+            </section>
+
+            <!-- SIGNUP PANEL -->
+            <section class="form-panel hidden-step" id="signup-panel">
+                <h1 class="form-title">Create an Account</h1>
+                <div id="signup-error" class="auth-error"></div>
+                <form onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Full Name <span>*</span></label>
+                        <input type="text" id="signup-name" placeholder="e.g. Juan Dela Cruz" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address <span>*</span></label>
+                        <input type="email" id="signup-email" placeholder="Enter your email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password <span>*</span></label>
+                        <div class="pwd-wrapper">
+                            <input type="password" id="signup-password" placeholder="Create a password" autocomplete="new-password">
+                            <button type="button" class="pwd-toggle" aria-label="Toggle password visibility">
+                                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="eye-closed hidden-step" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                            </button>
+                        </div>
+                        <!-- Strength bar -->
+                        <div class="pwd-strength-track">
+                            <div id="pwd-strength-bar" class="pwd-strength-bar"></div>
+                        </div>
+                        <span id="pwd-strength-text" class="pwd-strength-label"></span>
+                        <!-- Rule checklist -->
+                        <ul class="pwd-rules">
+                            <li id="rule-length">Minimum 8 characters</li>
+                            <li id="rule-upper">At least 1 uppercase letter (A–Z)</li>
+                            <li id="rule-lower">At least 1 lowercase letter (a–z)</li>
+                            <li id="rule-number">At least 1 number (0–9)</li>
+                            <li id="rule-special">At least 1 special character (!@#$%…)</li>
+                            <li id="rule-nospaces">No spaces</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password <span>*</span></label>
+                        <div class="pwd-wrapper">
+                            <input type="password" id="signup-password-confirm" placeholder="Confirm your password" autocomplete="new-password">
+                            <button type="button" class="pwd-toggle" aria-label="Toggle password visibility">
+                                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="eye-closed hidden-step" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="button" class="submit-btn" id="btn-signup">Create Account</button>
+
+                    <p class="auth-toggle-text">
+                        Already have an account? <span class="auth-toggle-link" id="show-login">Log in</span>
+                    </p>
+                </form>
+            </section>
 
         </div>
     </div>
-<script src="signup.js"></script>
+
+    <script src="js/auth.js" defer></script>
+
 </body>
 </html>
